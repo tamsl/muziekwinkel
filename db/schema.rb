@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100114015756) do
+ActiveRecord::Schema.define(:version => 20100119141841) do
 
   create_table "aankoops", :force => true do |t|
     t.integer  "product_id"
@@ -67,6 +67,22 @@ ActiveRecord::Schema.define(:version => 20100114015756) do
     t.integer  "album_id"
     t.integer  "tracknr"
     t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "login"
+    t.string   "email"
+    t.string   "remember_token"
+    t.string   "crypted_password",          :limit => 40
+    t.string   "password_reset_code",       :limit => 40
+    t.string   "salt",                      :limit => 40
+    t.string   "activation_code",           :limit => 40
+    t.datetime "remember_token_expires_at"
+    t.datetime "activated_at"
+    t.datetime "deleted_at"
+    t.string   "state",                                   :default => "passive"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
