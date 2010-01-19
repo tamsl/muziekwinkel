@@ -1,4 +1,11 @@
 <h1>Listing nummers</h1>
+<h3>Pagina <%= h @pagina %></h3>
+
+<% if @pagina > 0 %>
+  <%= link_to 'Vorige', '/nummers/?pagina=' + (@pagina - 1).to_s %>
+<% end %>
+
+<%= link_to 'Volgende', '/nummers/?pagina=' + (@pagina + 1).to_s %>
 
 <table>
   <tr>

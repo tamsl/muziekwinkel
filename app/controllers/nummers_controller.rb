@@ -4,7 +4,8 @@ class NummersController < ApplicationController
     layout 'standard'
     
   def index
-    @nummers = Nummer.find(:all)
+    @pagina = params[:pagina].to_i
+    @nummers = Nummer.all(:limit => 50, :offset => @pagina * 50)
 
     respond_to do |format|
       format.html # index.html.erb
