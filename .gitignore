@@ -7,4 +7,5 @@
 *.sqlite
 # logs
 log
-
+# .project file. Van evert?
+.project
