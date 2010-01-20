@@ -5,7 +5,7 @@
 
   <p>
     <%= f.label :product %><br />
-    <%= f.collection_select :product_id, Product.find(:all).sort_by {|item| item.titel}, :id, :titel %>
+    <%= f.collection_select :product_id, Product.find(:all), :id, :titel %>
   </p>
   <p>
     <%= f.label :klant %><br />
