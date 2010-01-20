@@ -18,7 +18,7 @@ $('#categoryList').listnav({
   <ul id="categoryList">
 	<% for artiest in @artiests %>
 <li>
-    <%=h artiest %> - <%= link_to 'Show', artiest %> </li><% end %>
+    <%=h artiest %> - <%= link_to 'Show', "/artiests/show?naam=#{artiest}" %> </li><% end %>
 </ul>
 <br/>
 </div></div>

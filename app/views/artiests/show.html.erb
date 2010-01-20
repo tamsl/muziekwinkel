@@ -1,0 +1,9 @@
+<h1>Albums van <%=h @artiest_naam %></h1>
+
+<ul>
+<% for album in @albums %>
+  <li><%=h album.titel %></li>
+<% end %>
+</ul>
+
+<%= link_to 'Terug', '/artiests' %>
