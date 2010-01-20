@@ -124,7 +124,7 @@ $(document).ready(function()
 
 <div class="login">
 <form action="/session" method="post"><p>
- <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>"/> &nbsp;user: <input id="login" name="login" type="text" class="input"/> wachtwoord: <input type="password" id="password" name="password" class="input" /></p> <div class="button">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>"/> &nbsp;user: <input id="login" name="login" type="text" class="input"/> wachtwoord: <input type="password" id="password" name="password" class="input" /></p> <div class="button">
 	<input name="commit" type="submit" value="Log in"/>
 </div></form>
 
