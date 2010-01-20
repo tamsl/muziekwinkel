@@ -1,0 +1,32 @@
+Restfully Authenticated Generator
+====
+
+This is a advanced restful authentication generator for rails, taken 
+from acts as authenticated.  Currently it requires Rails 2.0.2 or above.
+
+To use:
+
+  ./script/generate authenticated user sessions
+
+The first parameter specifies the model that gets created in signup
+(typically a user or account model).  A model with migration is 
+created, as well as a basic controller with the create method.
+
+The second parameter specifies the sessions controller name.  This is
+the controller that handles the actual login/logout function on the 
+site.
+
+This generator includes an ActionMailer and its respective Activation Code through email.
+
+This generator also builds in support for acts_as_state_machine
+and generates activation code.  This was taken from:
+
+http://www.vaporbase.com/postings/stateful_authentication
+
+You can pass --skip-migration to skip the user migration.
+
+Define your users resource like this:
+
+	map.resources :users, :member => { :suspend   => :put,
+                                     :unsuspend => :put,
+                                     :purge     => :delete }

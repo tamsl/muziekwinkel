@@ -1,0 +1,9 @@
+<h2>Forgot your password</h2>
+
+<% form_tag url_for(:action => 'create') do %>
+	<p>What is the email address used to create your account?<br />
+	<%= text_field_tag :email, "", :size => 50 %></p>
+	<p><%= submit_tag 'Send' %></p>
+<% end %>
+
+<p>or <%= link_to 'go back', '/' %></p>

@@ -1,0 +1,24 @@
+<html>
+<head>
+	<title><%%= @page_title %></title>
+	<style>
+		div#notice {
+			color: green;
+		}
+		div#error {
+			color: red;
+		}	
+		div#errorExplanation {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="page">
+		<%% if flash[:error] %><div id="error"><%%= flash[:error] %></div><%% end %>
+		<%% if flash[:notice] %><div id="notice"><%%= flash[:notice] %></div><%% end %>
+		
+		<%%= yield %>
+	</div>
+</body>
+</html>

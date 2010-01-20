@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
-  
+
   before_filter :login_required, :except => :show
 
   # Activate action
@@ -9,13 +9,13 @@ class AccountsController < ApplicationController
     # Uncomment and change paths to have user logged in after activation - not recommended
     # self.current_user = User.find(params[:id])
     # self.current_user.do_activate
-    
+
     User.find_and_activate!(params[:id])
     flash[:notice] = "Your account has been activated"
     redirect_to login_path
   rescue User::ArgumentError
     flash[:error] = 'Activation code not found'
-    redirect_to new_user_path 
+    redirect_to new_user_path
   rescue User::ActivationCodeNotFound
     flash[:error] = 'Activation code not found'
     redirect_to new_user_path

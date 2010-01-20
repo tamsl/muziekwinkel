@@ -1,0 +1,18 @@
+<h1>Sign up</h1>
+
+<%%= error_messages_for :<%= file_name %> %>
+
+<%% form_for :<%= file_name %>, :url => <%= table_name %>_path do |f| -%>
+<p><label for="email">Email</label><br/>
+<%%= f.text_field :email %></p>
+
+<p><label for="password">Password</label><br/>
+<%%= f.password_field :password %></p>
+
+<p><label for="password_confirmation">Confirm password</label><br/>
+<%%= f.password_field :password_confirmation %></p>
+
+<p><%%= submit_tag 'Sign up' %></p>
+<%% end -%>
+
+<p>or <%%= link_to 'log in', login_path %></p>
