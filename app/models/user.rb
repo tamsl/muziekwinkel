@@ -3,16 +3,21 @@ class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password
 
-  validates_presence_of     :login, :email
-  validates_presence_of     :password,                   :if => :password_required?
-  validates_presence_of     :password_confirmation,      :if => :password_required?
-  validates_length_of         :password, :within => 6..20, :too_long => "is too long. Use 6-20 characters", :too_short => "is too short. Use 6-20 characters", :if => :password_required?
-  validates_confirmation_of :password,                   :if => :password_required?
-  validates_length_of         :login,    :within => 3..40
-  validates_length_of         :email,    :within => 3..100
-  validates_format_of         :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
-  validates_uniqueness_of   :login, :email, :case_sensitive => false
-  before_save                   :encrypt_password
+  # password validations
+  validates_presence_of :password,              :if => :password_required?
+  validates_presence_of :password_confirmation, :if => :password_required?
+  validates_confirmation_of :password,          :if => :password_required?
+  validates_length_of :password, :within => 6..20, :too_long => "is too long. Use 6-20 characters", :too_short => "is too short. Use 6-20 characters", :if => :password_required?
+
+  # email validations
+  validates_length_of :email, :within => 3..100
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  validates_uniqueness_of :login, :email, :case_sensitive => false
+
+  validates_presence_of :login, :email
+  validates_length_of :login, :within => 3..40
+
+  before_save :encrypt_password
   
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.

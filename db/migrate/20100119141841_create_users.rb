@@ -4,16 +4,25 @@ class CreateUsers < ActiveRecord::Migration
         t.string :login, :email, :remember_token
         t.string :crypted_password,          :limit => 40
         t.string :password_reset_code,       :limit => 40
-        t.string :salt,                      :limit => 40      
+        t.string :salt,                      :limit => 40
         t.string :activation_code,           :limit => 40
         t.datetime :remember_token_expires_at, :activated_at, :deleted_at
         t.string :state, :null => :no, :default => 'passive'
 
-        t.timestamps
-      end
-    end
+        # klant gegevens
+        t.string :voornaam
+        t.string :achternaam
+        t.boolean :geslacht
+        t.date :geboortedatum
+        t.string :creditcard
+        t.string :postcode
+        t.string :huisnummer
 
-    def self.down
+        t.timestamps
+    end
+  end
+
+  def self.down
     drop_table "users"
   end
 end

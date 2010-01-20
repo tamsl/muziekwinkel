@@ -2,13 +2,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :member => { :suspend => :put, :unsuspend => :put, :purge => :delete }
 
   #login
-  map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
-  map.signup '/signup', :controller => 'users', :action => 'new'
-  map.login  '/login', :controller => 'sessions', :action => 'new'
+  map.signup '/signup', :controller => 'klants',    :action => 'new'
+  map.login  '/login',  :controller => 'sessions', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
-  map.forgot_password '/forgot_password', :controller => 'users', :action => 'forgot_password'
+  map.activate '/activate/:activation_code',  :controller => 'klants', :action => 'activate'
+  map.forgot_password '/forgot_password',     :controller => 'users', :action => 'forgot_password'
   map.change_password '/change_password/:id', :controller => 'users', :action => 'change_password'
-  map.reset_password '/reset_password/:id', :controller => 'users', :action => 'reset_password'              
+  map.reset_password  '/reset_password/:id',  :controller => 'users', :action => 'reset_password'             
 
   map.resource :session
 
@@ -20,9 +20,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :commentaars
   map.resources :aankoops
   map.resources :klants
-  map.resources :disclaimer, :only => "index"
 
-  map.resources :search, :only => "index"
+  map.connect 'disclaimer/', :controller => "home", :action => "disclaimer"
+  map.connect 'search/',     :controller => "home", :action => "search"
 
   map.root :controller => "home"
   # The priority is based upon order of creation: first created -> highest priority.
@@ -43,7 +43,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample resource route with sub-resources:
   #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
-  
+ 
   # Sample resource route with more complex sub-resources
   #   map.resources :products do |products|
   #     products.resources :comments

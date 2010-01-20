@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     # request forgery protection.
     # uncomment at your own risk
     # reset_session
-    @user = User.new(params[:user])
+    @user = Klant.new(params[:user])
     @user.register! if @user.valid?
     if @user.errors.empty?
       self.current_user = @user
@@ -29,10 +29,10 @@ class UsersController < ApplicationController
   end
 
   def activate
-    self.current_user = params[:activation_code].blank? ? false : User.find_by_activation_code(params[:activation_code])
+    self.current_user = params[:activation_code].blank? ? false : user.find_by_activation_code(params[:activation_code])
     if logged_in? && !current_user.active?
       current_user.activate!
-      flash[:notice] = "Signup complete!"
+      flash[:notice] = "signup complete!"
     end
     redirect_back_or_default('/')
   end
@@ -59,48 +59,48 @@ class UsersController < ApplicationController
 
 protected
   def find_user
-    @user = User.find(params[:id])
+    @user = user.find(params[:id])
   end
 
   def change_password
     return unless request.post?
-    if User.authenticate(current_user.login, params[:old_password])
+    if user.authenticate(current_user.login, params[:old_password])
       if ((params[:password] == params[:password_confirmation]) && !params[:password_confirmation].blank?)
         current_user.password_confirmation = params[:password_confirmation]
         current_user.password = params[:password]
 
         if current_user.save
-          flash[:notice] = "Password successfully updated" 
+          flash[:notice] = "password successfully updated" 
           redirect_to profile_url(current_user.login)
         else
-          flash[:alert] = "Password not changed" 
+          flash[:alert] = "password not changed" 
         end
 
       else
-        flash[:alert] = "New Password mismatch" 
+        flash[:alert] = "new password mismatch" 
         @old_password = params[:old_password]
       end
     else
-        flash[:alert] = "Old password incorrect"
+        flash[:alert] = "old password incorrect"
     end
   end
 
   #gain email address
   def forgot_password
     return unless request.post?
-    if @user = User.find_by_email(params[:user][:email])
+    if @user = user.find_by_email(params[:user][:email])
       @user.forgot_password
       @user.save
       redirect_back_or_default('/')
-      flash[:notice] = "A password reset link has been sent to your email address" 
+      flash[:notice] = "a password reset link has been sent to your email address" 
     else
-      flash[:alert] = "Could not find a user with that email address" 
+      flash[:alert] = "could not find a user with that email address" 
     end
   end
 
   #reset password
   def reset_password
-    @user = User.find_by_password_reset_code(params[:id])
+    @user = user.find_by_password_reset_code(params[:id])
     return if @user unless params[:user]
 
     if ((params[:user][:password] && params[:user][:password_confirmation]) && !params[:user][:password_confirmation].blank?)
@@ -108,10 +108,10 @@ protected
       current_user.password_confirmation = params[:user][:password_confirmation]
       current_user.password = params[:user][:password]
       @user.reset_password
-      flash[:notice] = current_user.save ? "Password reset success." : "Password reset failed." 
+      flash[:notice] = current_user.save ? "password reset success." : "password reset failed." 
       redirect_back_or_default('/')
     else
-      flash[:alert] = "Password mismatch" 
+      flash[:alert] = "password mismatch" 
     end 
   end
 

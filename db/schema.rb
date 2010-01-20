@@ -30,32 +30,6 @@ ActiveRecord::Schema.define(:version => 20100119141841) do
     t.datetime "updated_at"
   end
 
-  create_table "data_files", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "klants", :force => true do |t|
-    t.string   "voornaam"
-    t.string   "achternaam"
-    t.boolean  "geslacht"
-    t.date     "geboortedatum"
-    t.string   "email"
-    t.string   "creditcard"
-    t.string   "postcode"
-    t.string   "huisnummer"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "password"
-  end
-
-  create_table "medewerkers", :force => true do |t|
-    t.string   "password"
-    t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "products", :force => true do |t|
     t.string   "titel"
     t.string   "prijs"
@@ -83,6 +57,13 @@ ActiveRecord::Schema.define(:version => 20100119141841) do
     t.datetime "activated_at"
     t.datetime "deleted_at"
     t.string   "state",                                   :default => "passive"
+    t.string   "voornaam"
+    t.string   "achternaam"
+    t.boolean  "geslacht"
+    t.date     "geboortedatum"
+    t.string   "creditcard"
+    t.string   "postcode"
+    t.string   "huisnummer"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
