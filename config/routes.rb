@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
 
   map.resources :medewerkers
+  map.resources :artiests
   map.resources :albums
   map.resources :nummers
   map.resources :products

@@ -3,9 +3,27 @@ class AlbumsController < ApplicationController
   # GET /albums.xml
     layout 'standard'
   
-  def index
+    def index
     @albums = Album.find(:all)
 
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @albums }
+    end
+  end
+  
+  def nieuwe
+    @albums = Album.all(:order => "jaar DESC", :limit => 10)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @albums }
+    end
+  end
+  
+  def bestverkocht
+    @albums = Product.all(:conditions => "type = 'Album'", :order => ":aankoops DESC", :limit => 10)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @albums }

@@ -2,7 +2,8 @@ class ArtiestsController < ApplicationController
   layout 'standard'
 
   def index
-    @artiests = Nummer.find(:all, :select => "DISTINCT artiest").collect { |row| row.artiest }
+    @artiests = Product.find(:all, :select => "DISTINCT artiest").collect { |row| row.artiest }
+
   end
 
   def show
