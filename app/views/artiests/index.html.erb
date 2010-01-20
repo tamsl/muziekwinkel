@@ -1,0 +1,24 @@
+<div style="background-color:#ccc; width:559px; padding:0px 10px 10px 10px">
+<div style="background-color:#fff; width:559px; margin:-1 10 10 10;">
+<script type="text/javascript" src="jquery.listnav.min-2.1.js" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+$(function(){
+$('#categoryList').listnav({ 
+    initLetter: 'a', 
+    includeAll: true, 
+    includeOther: true, 
+    flagDisabled: true, 
+    noMatchText: 'Er staan nog geen artiesten met deze letter in de database', 
+    showCounts: true, 
+    cookieName: 'my-main-list', 
+    onClick: function(letter){}, 
+    prefixes: ['the','a'] 
+  });
+});</script><div id="categoryList-navbalk"><div id="categoryList-nav"></div></div><br />
+  <ul id="categoryList">
+	<% for artiest in @artiests %>
+<li>
+    <%=h artiest %> - <%= link_to 'Show', artiest %> </li><% end %>
+</ul>
+<br/>
+</div></div>
