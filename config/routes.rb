@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'search/',       :controller => "home",   :action => "search"
   map.connect 'albums/nieuwe', :controller => "albums", :action => "nieuwe"
   map.connect 'albums/bestverkocht', :controller => "albums", :action => "bestverkocht" 
+  map.connect 'genre/:genre', :controller => "home", :action => "genre"
 
   map.resources :medewerkers
   map.resources :albums
