@@ -13,7 +13,7 @@ class AlbumsController < ApplicationController
   end
   
   def nieuwe
-    @albums = Album.all(:order => "jaar DESC", :limit => 10)
+    @albums = Album.all(:order =>"jaar DESC", :limit => 10)
 
     respond_to do |format|
       format.html # index.html.erb
