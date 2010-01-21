@@ -4,7 +4,7 @@
 <% for album in @albums %>
 <table width="559px" bgcolor="#ffffff">
  <tr>
-    <td width="100px" rowspan="6"><%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '100px', :height => '100px', :vspace => '3px', :hspace => '3px', :border => '0px'), :action => '../../albums', :id => album %></td>
+    <td width="100px" rowspan="6"><%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '100px', :height => '100px', :vspace => '3px', :hspace => '3px', :border => '0px'), :controller => 'Albums', :action => 'show', :id => album %></td>
     <td width="50px">Artiest:</td>
     <td><%=h album.artiest %>&nbsp;</td>
   </tr>
