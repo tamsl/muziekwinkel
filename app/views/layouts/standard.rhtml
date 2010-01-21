@@ -23,6 +23,56 @@ $(document).ready(function()
    });
  });
 </script>
+<script type="text/javascript" src="swfobject.js"></script>
+<script type="text/javascript">
+
+//Support function: checks to see if target
+//element is an object or embed element
+function isObject(targetID){
+   var isFound = false;
+   var el = document.getElementById(targetID);
+   if(el && (el.nodeName === "OBJECT" || el.nodeName === "EMBED")){
+      isFound = true;
+   }
+   return isFound;
+}
+
+//Support function: creates an empty
+//element to replace embedded SWF object
+function replaceSwfWithEmptyDiv(targetID){
+   var el = document.getElementById(targetID);
+   if(el){
+      var div = document.createElement("div");
+      el.parentNode.insertBefore(div, el);
+ 
+      //Remove the SWF
+      swfobject.removeSWF(targetID);
+   
+      //Give the new DIV the old element's ID
+      div.setAttribute("id", targetID);
+   }
+}
+
+function loadSWF(url, targetID, file, artiest, titel){
+   //Check for existing SWF
+   if(isObject(targetID)){
+      //replace object/element with a new div
+      replaceSwfWithEmptyDiv(targetID);
+   } 
+   //Embed SWF
+   if (swfobject.hasFlashPlayerVersion("7")) {
+      var params = { flashvars:"titel=" + titel + "&artiest=" + artiest + "&mp3=" + file};
+      var attributes = { data: url, width:"960", height:"80" };
+      var obj = swfobject.createSWF(attributes, params, targetID);
+   }
+}
+
+function play(file, artiest, titel) {
+	loadSWF("SimpleMP3_01.swf", "previewplayer", file, artiest, titel);
+}
+
+$(function() { play('hot.mp3', 'None', 'None')});
+</script>
 
 </head>
 <body>
@@ -286,29 +336,10 @@ $(document).ready(function()
 </div>
 
 <div class="mp3player">
-	<object
-        classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-        codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,22,0"
-        id="SimpleMP3_01"
-        width="960" height="80">
-        <param name="movie" value="SimpleMP3_01.swf">
-        <param name="bgcolor" value="#222222">
-        <param name="quality" value="high">
-        <param name="allowscriptaccess" value="samedomain">
-        <embed
-		  type="application/x-shockwave-flash"
-          pluginspage="http://www.adobe.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
-          name="SimpleMP3_01"
-          width="960" height="80"
-          src="SimpleMP3_01.swf"
-          bgcolor="#222222"
-          quality="high"
-          allowscriptaccess="samedomain"
-        >
-          <noembed>
-          </noembed>
-        </embed>
-      </object> </div>
+	<div id="previewplayer">
+Download adobe flash player voor de nummer previews.
+</div>
+</div>
 </div>
 </body>
 </html>
