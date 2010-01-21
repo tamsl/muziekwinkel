@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :session
 
+  map.connect 'genre/:genre', :controller => "home", :action => "genre"
 
   map.resources :medewerkers
   map.resources :albums

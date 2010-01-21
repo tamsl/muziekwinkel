@@ -6,6 +6,14 @@ class HomeController < ApplicationController
   def disclaimer
   end
 
+  def genre
+    @albums = Product.all(:conditions => ["type = 'Album' and LOWER(genre) = ?", params[:genre].downcase], :order => ":artiest ASC")
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @albums }
+    end
+  end
+
   def search
     [:artiest, :album, :song].each { |n|
         if params[n].nil? or params[n].empty?
