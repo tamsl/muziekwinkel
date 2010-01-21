@@ -1,0 +1,22 @@
+<h1>Listing uitgelichts</h1>
+
+<table>
+  <tr>
+    <th>Album</th>
+    <th>Omschrijving</th>
+  </tr>
+
+<% for uitgelicht in @uitgelichts %>
+  <tr>
+    <td><%=h uitgelicht.album_id %></td>
+    <td><%=h uitgelicht.omschrijving %></td>
+    <td><%= link_to 'Show', uitgelicht %></td>
+    <td><%= link_to 'Edit', edit_uitgelicht_path(uitgelicht) %></td>
+    <td><%= link_to 'Destroy', uitgelicht, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New uitgelicht', new_uitgelicht_path %>

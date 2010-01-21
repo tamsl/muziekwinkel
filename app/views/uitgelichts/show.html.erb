@@ -1,0 +1,13 @@
+<p>
+  <b>Album:</b>
+  <%=h @uitgelicht.album_id %>
+</p>
+
+<p>
+  <b>Omschrijving:</b>
+  <%=h @uitgelicht.omschrijving %>
+</p>
+
+
+<%= link_to 'Edit', edit_uitgelicht_path(@uitgelicht) %> |
+<%= link_to 'Back', uitgelichts_path %>
