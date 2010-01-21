@@ -27,10 +27,10 @@ class UserMailer < ActionMailer::Base
   protected
       
   def setup_email(user)
-    recipients "#{user.email}"
-    from       %("YourMusicStore.nl" ) # Sets the User FROM Name and Email
-    subject    "[YourMusicStore.nl] New account information "
-    body       :user => user
-    sent_on    Time.now
+    @recipients = "#{user.email}"
+    @from       = "fredo.tan@student.uva.nl" # Sets the User FROM Name and Email
+    @subject    = "[YourMusicStore.nl] New account information "
+    @body[:user] = user
+    @sent_on    = Time.now
   end
 end  
