@@ -1,4 +1,3 @@
-<<<<<<< HEAD:app/views/albums/index.html.erb
 <div style="background-color:#ccc; width:559px; padding:10px">
 
 <script type="text/javascript" src="jquery.listnav.min-2.1.js" charset="utf-8"></script>
@@ -18,9 +17,6 @@ $('#categoryList').listnav({
 });</script><div id="categoryList-navbalk"><div id="categoryList-nav"></div></div><br />
   <ul id="categoryList" style="list-style-type: none; padding: 0px;">
 
-=======
-<div style="background-color:#cccccc; width:559px; padding:10px">
->>>>>>> 3456825575c6ea146b6c8113179ac58c107d4fcc:app/views/albums/index.html.erb
 <% for album in @albums %>
 <li style="margin: 0px; padding: 0px">
 <span style="display: none"><%= h album.artiest %><%=h album.titel %></span>
@@ -71,5 +67,7 @@ $('#categoryList').listnav({
 </li>
 <% end %>
 </ul>
-<%= link_to 'New album', new_album_path %>
+<% if medewerker_logged_in? %>
+    <%= link_to 'New album', new_album_path %>
+<% end %>
 </div>
