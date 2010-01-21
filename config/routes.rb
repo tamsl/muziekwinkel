@@ -12,6 +12,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :session
 
+  map.connect 'disclaimer/',   :controller => "home",   :action => "disclaimer"
+  map.connect 'search/',       :controller => "home",   :action => "search"
+  map.connect 'albums/nieuwe', :controller => "albums", :action => "nieuwe"
+  map.connect 'albums/bestverkocht', :controller => "albums", :action => "bestverkocht" 
 
   map.resources :medewerkers
   map.resources :albums
@@ -20,9 +24,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :commentaars
   map.resources :aankoops
   map.resources :klants
-
-  map.connect 'disclaimer/', :controller => "home", :action => "disclaimer"
-  map.connect 'search/',     :controller => "home", :action => "search"
 
   map.root :controller => "home"
   # The priority is based upon order of creation: first created -> highest priority.
