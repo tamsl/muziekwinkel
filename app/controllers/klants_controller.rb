@@ -46,8 +46,8 @@ class KlantsController < ApplicationController
     @klant.register! if @klant.valid?
     if @klant.errors.empty?
       UserMailer.deliver_signup_notification(@klant)
-      self.current_user = @klant
-      redirect_back_or_default('/')
+      #self.current_user = @klant
+      #redirect_back_or_default('/')
       flash[:notice] = "Thanks for signing up!"
     else
       render :action => 'new'
