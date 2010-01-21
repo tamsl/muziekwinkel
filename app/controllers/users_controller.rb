@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  ssl_required :create
   # Be sure to include AuthenticationSystem in Application Controller instead
   layout 'standard'
 
@@ -20,6 +21,7 @@ class UsersController < ApplicationController
     @user = Klant.new(params[:user])
     @user.register! if @user.valid?
     if @user.errors.empty?
+      UserMailer.deliver_signup_notification(@user)
       self.current_user = @user
       redirect_back_or_default('/')
       flash[:notice] = "Thanks for signing up!"

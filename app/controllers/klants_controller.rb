@@ -45,6 +45,7 @@ class KlantsController < ApplicationController
     @klant = Klant.new(params[:klant])
     @klant.register! if @klant.valid?
     if @klant.errors.empty?
+      UserMailer.deliver_signup_notification(@klant)
       self.current_user = @klant
       redirect_back_or_default('/')
       flash[:notice] = "Thanks for signing up!"
