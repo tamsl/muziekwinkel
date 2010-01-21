@@ -31,7 +31,24 @@ class AlbumsController < ApplicationController
     end
   end
   
-    def genre_pop
+  def bestrating
+    @albums = Album.all.sort_by { |a| 
+        x = a.commentaars.average(:rating)
+        if x.nil?
+          0
+        else
+          x
+        end
+    }.reverse[0..9]
+    
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @albums }
+    end
+  end
+
+  
+  def genre_pop
     @albums = Product.all(:conditions => "type = 'Album' and genre = 'Pop' ", :order => ":artiest ASC", :limit => 100)
     respond_to do |format|
       format.html # index.html.erb
