@@ -3,4 +3,7 @@ module ApplicationHelper
     def user_logged_in?
       session[:user_id]
     end
+
+    def medewerker_logged_in?
+      session[:user_id] and current_user.type == 'medewerker'
 end
