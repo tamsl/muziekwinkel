@@ -2,7 +2,7 @@ class KlantsController < ApplicationController
   # GET /klants
   # GET /klants.xml
     layout 'standard'
-  
+ 
   def index
     @klants = Klant.find(:all)
 
@@ -27,11 +27,6 @@ class KlantsController < ApplicationController
   # GET /klants/new.xml
   def new
     @klant = Klant.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @klant }
-    end
   end
 
   # GET /klants/1/edit
@@ -42,46 +37,106 @@ class KlantsController < ApplicationController
   # POST /klants
   # POST /klants.xml
   def create
+    cookies.delete :auth_token
+    # protects against session fixation attacks, wreaks havoc with
+    # request forgery protection.
+    # uncomment at your own risk
+    # reset_session
     @klant = Klant.new(params[:klant])
-
-    respond_to do |format|
-      if @klant.save
-        flash[:notice] = 'Klant was successfully created.'
-        format.html { redirect_to(@klant) }
-        format.xml  { render :xml => @klant, :status => :created, :location => @klant }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @klant.errors, :status => :unprocessable_entity }
-      end
+    @klant.register! if @klant.valid?
+    if @klant.errors.empty?
+      self.current_user = @klant
+      redirect_back_or_default('/')
+      flash[:notice] = "Thanks for signing up!"
+    else
+      render :action => 'new'
     end
   end
 
-  # PUT /klants/1
-  # PUT /klants/1.xml
-  def update
-    @klant = Klant.find(params[:id])
-
-    respond_to do |format|
-      if @klant.update_attributes(params[:klant])
-        flash[:notice] = 'Klant was successfully updated.'
-        format.html { redirect_to(@klant) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @klant.errors, :status => :unprocessable_entity }
-      end
+  def activate
+    self.current_user = params[:activation_code].blank? ? false : user.find_by_activation_code(params[:activation_code])
+    if logged_in? && !current_user.active?
+      current_user.activate!
+      flash[:notice] = "signup complete!"
     end
+    redirect_back_or_default('/')
   end
 
-  # DELETE /klants/1
-  # DELETE /klants/1.xml
+  def suspend
+    @klant.suspend!
+    redirect_to users_path
+  end
+
+  def unsuspend
+    @klant.unsuspend!
+    redirect_to users_path
+  end
+
   def destroy
-    @klant = Klant.find(params[:id])
-    @klant.destroy
+    @klant.delete!
+    redirect_to users_path
+  end
 
-    respond_to do |format|
-      format.html { redirect_to(klants_url) }
-      format.xml  { head :ok }
+  def purge
+    @klant.destroy
+    redirect_to users_path
+  end
+
+protected
+  def find_user
+    @klant = user.find(params[:id])
+  end
+
+  def change_password
+    return unless request.post?
+    if user.authenticate(current_user.login, params[:old_password])
+      if ((params[:password] == params[:password_confirmation]) && !params[:password_confirmation].blank?)
+        current_user.password_confirmation = params[:password_confirmation]
+        current_user.password = params[:password]
+
+        if current_user.save
+          flash[:notice] = "password successfully updated"
+          redirect_to profile_url(current_user.login)
+        else
+          flash[:alert] = "password not changed"
+        end
+
+      else
+        flash[:alert] = "new password mismatch"
+        @old_password = params[:old_password]
+      end
+    else
+        flash[:alert] = "old password incorrect"
+    end
+  end
+
+  #gain email address
+  def forgot_password
+    return unless request.post?
+    if @klant = user.find_by_email(params[:user][:email])
+      @klant.forgot_password
+      @klant.save
+      redirect_back_or_default('/')
+      flash[:notice] = "a password reset link has been sent to your email address"
+    else
+      flash[:alert] = "could not find a user with that email address"
+    end
+  end
+
+  #reset password
+  def reset_password
+    @klant = user.find_by_password_reset_code(params[:id])
+    return if @klant unless params[:user]
+
+    if ((params[:user][:password] && params[:user][:password_confirmation]) && !params[:user][:password_confirmation].blank?)
+      self.current_user = @klant #for the next two lines to work
+      current_user.password_confirmation = params[:user][:password_confirmation]
+      current_user.password = params[:user][:password]
+      @klant.reset_password
+      flash[:notice] = current_user.save ? "password reset success." : "password reset failed."
+      redirect_back_or_default('/')
+    else
+      flash[:alert] = "password mismatch"
     end
   end
 end

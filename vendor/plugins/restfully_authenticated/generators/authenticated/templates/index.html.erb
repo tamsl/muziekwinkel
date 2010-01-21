@@ -1,0 +1,7 @@
+<h1>Dashboard</h1>
+
+<ul>
+	<li><%%= link_to 'Change password', change_password_path %></li>
+	<li><%%= link_to 'View your user profile', <%= file_name %>_path(current_<%= file_name %>.id) %></li>
+	<li><%%= link_to 'Log out', logout_path %></li>
+</ul>

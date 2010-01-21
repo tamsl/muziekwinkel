@@ -11,14 +11,6 @@ class ProductsController < ApplicationController
       format.xml  { render :xml => @products }
     end
   end
-
-  def genre_pop
-    @albums = Product.all(:conditions => "type = 'Album'and genre = 'Pop' ", :order => ":artiest ASC", :limit => 100)
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @albums }
-    end
-  end
   
   # GET /products/1
   # GET /products/1.xml
