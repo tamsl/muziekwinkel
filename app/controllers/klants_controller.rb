@@ -74,8 +74,9 @@ class KlantsController < ApplicationController
   end
 
   def destroy
-    @klant.delete!
-    redirect_to users_path
+    @klant = Klant.find(params[:id])
+    @klant.destroy
+    redirect_to klants_path
   end
 
   def purge
