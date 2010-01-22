@@ -11,4 +11,12 @@ module ApplicationHelper
           nil
       end
     end
+    
+    def user_logged_in?
+      session[:user_id]
+    end
+
+    def user_is_medewerker?
+       session[:user_id] && (user = User.find(session[:user_id])) && user.type
+    end
 end
