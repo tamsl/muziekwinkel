@@ -1,36 +1,40 @@
 <div style="background-color:#ccc; width:559px; padding:10px">
 <table width="559px" border="0" align="center" cellpadding="2">
-  <tr style="height:22px">
-    <td width="175px" rowspan="8" valign="top" bgcolor="#ffffff"><%= image_tag((@album.coverart or 'default-album.jpg'), :width => '175px', :height => '175px', :vspace => '7px', :hspace => '7px') %></td>
-    <td width="62px" bgcolor="#ffffff"><strong>Artiest:</strong></td>
-    <td bgcolor="#ffffff"><%=h @album.artiest %></td>
+  <tr style="height:20px">
+    <td style="width:175px; height:175px;" rowspan="8" valign="middle" bgcolor="#ffffff"><%= image_tag((@album.coverart or 'default-album.jpg'), :width => '177px', :height => '177px', :vspace => '7px', :hspace => '7px') %></td>
+    <td style="width:65px" bgcolor="#ffffff"><strong>Artiest:</strong></td>
+    <td style="width:340px"bgcolor="#ffffff"><%=h @album.artiest %></td>
   </tr>
-  <tr style="height:22px">
+  <tr style="height:20px">
     <td bgcolor="#ffffff"><strong>Titel:</strong></td>
     <td bgcolor="#ffffff"><%=h @album.titel %></td>
   </tr>
-  <tr style="height:22px">
+  <tr style="height:21px">
     <td bgcolor="#ffffff"><strong>Lengte:</strong></td>
     <td bgcolor="#ffffff"><%=h @album.lengte %></td>
   </tr>
-  <tr style="height:22px">
+  <tr style="height:20px">
     <td bgcolor="#ffffff"><strong>Genre:</strong></td>
     <td bgcolor="#ffffff"><%=h @album.genre %></td>
   </tr>
-  <tr style="height:22px">
+  <tr style="height:20px">
     <td bgcolor="#ffffff"><strong>Releasedatum:</strong></td>
     <td bgcolor="#ffffff"><%=h @album.jaar %></td>
   </tr>
-    <tr style="height:22px">
+    <tr style="height:20px">
     <td bgcolor="#ffffff"><strong>waardering:</strong></td>
     <td bgcolor="#ffffff"><%=@album.commentaars.average(:rating)%></td>
   </tr>
-  <tr style="height:22px">
+  <tr style="height:20px">
     <td bgcolor="#ffffff"><strong>Prijs:</strong></td>
-    <td bgcolor="#ffffff">&euro;<%=h @album.prijs %> <div style="right:1px; float: right; width: 82px" ><div class="playknop"></div><div class="numkoopknop"></div></div></td>
+    <td bgcolor="#ffffff"><span style="float:left; padding-top:2px;">&euro;<%=h @album.prijs %></span> <div style="right:1px; clear:none; float: right; width: 82px" ><div class="playknop"></div><div class="numkoopknop"></div></div></td>
   </tr>
 
     <tr>
+    <td ><strong></strong></td>
+    <td ></td>
+  </tr>
+      <tr>
     <td ><strong></strong></td>
     <td ></td>
   </tr>
@@ -39,6 +43,10 @@
   </tr>
   <tr>
     <td colspan="3" valign="top" bgcolor="#ffffff"><%= render :partial => 'nummers/index' %></td>
+  </tr>
+      <tr>
+    <td ><strong></strong></td>
+    <td ></td>
   </tr>
       <tr>
     <td colspan="3" valign="top" bgcolor="#ffffff"><strong>Commentaar:</strong></td>
