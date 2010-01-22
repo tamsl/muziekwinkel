@@ -200,7 +200,7 @@ display: inline;
 .mp3player {
     position:           fixed;
     bottom:             0px;
-    background-color:   #999;
+    background-color:   #222222;
     padding:            0px;
     margin-left:        auto;
     margin-right:       auto;
@@ -209,13 +209,7 @@ display: inline;
     border:             0px solid gray;
     border-top-width:   1px;
     border-top-style:   solid;
-    border-right-style: solid;
-    border-bottom-style:solid;
-    border-left-style:  solid;
-    border-top-color:   #FFF;
-    border-right-color: #FFF;
-    border-bottom-color:#FFF;
-    border-left-color:  #FFF;
+    border-top-color:   #ccc;
 }
                 
 /* achtergrond onder (als de inhoud div niet op volledige hoogte komt)*/
