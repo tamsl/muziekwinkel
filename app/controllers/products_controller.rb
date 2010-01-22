@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   # GET /products
   # GET /products.xml
-    layout 'standard'
+    layout 'standardproducts'
     
   def index
     @products = Product.find(:all)
