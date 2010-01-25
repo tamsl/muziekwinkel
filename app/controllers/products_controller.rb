@@ -3,6 +3,8 @@ class ProductsController < ApplicationController
   # GET /products.xml
     layout 'standardproducts'
     
+    before_filter :authorize, :except => [:index, :show]
+    
   def index
     @products = Product.find(:all)
 

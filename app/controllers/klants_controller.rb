@@ -2,6 +2,8 @@ class KlantsController < ApplicationController
   # GET /klants
   # GET /klants.xml
     layout 'standardklants'
+    
+    before_filter :authorize, :except => [:login, :signup, :new, :logout]
  
   def index
     @klants = Klant.find(:all)

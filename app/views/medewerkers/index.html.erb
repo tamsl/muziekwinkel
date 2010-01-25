@@ -2,12 +2,14 @@
 
 <table>
   <tr>
+    <th>Login</th>
     <th>Email</th>
     <th>Password</th>
   </tr>
 
 <% for medewerker in @medewerkers %>
   <tr>
+    <td><%=h medewerker.login %></td>
     <td><%=h medewerker.email %></td>
     <td><%=h medewerker.password %></td>
     <td><%= link_to 'Show', medewerker %></td>

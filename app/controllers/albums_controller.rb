@@ -2,7 +2,9 @@ class AlbumsController < ApplicationController
   # GET /albums
   # GET /albums.xml
     layout 'standard'
-  
+    
+    before_filter :authorize, :except => [:index, :show]
+    
     def index
     @albums = Album.find(:all)
 

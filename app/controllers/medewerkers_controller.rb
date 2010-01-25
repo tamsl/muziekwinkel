@@ -2,6 +2,8 @@ class MedewerkersController < ApplicationController
   # GET /medewerkers
   # GET /medewerkers.xml
     layout 'standard'
+    
+    before_filter :authorize, :except => [:login, :logout]
   
   def index
     @medewerkers = Medewerker.find(:all)

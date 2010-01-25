@@ -26,12 +26,16 @@
     <td><%=h nummer.lengte %></td>
     <td><%=h nummer.prijs %></td>
     <td><%= link_to 'Show', nummer %></td>
-    <td><%= link_to 'Edit', edit_nummer_path(nummer) %></td>
-    <td><%= link_to 'Destroy', nummer, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><% if user_is_medewerker? %>
+      <%= link_to 'Edit', edit_nummer_path(nummer) %>
+      <%= link_to 'Destroy', nummer, :confirm => 'Are you sure?', :method => :delete %>
+    <% end %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New nummer', new_nummer_path %>
+<% if user_is_medewerker? %>
+    <%= link_to 'New nummer', new_nummer_path %>
+<% end %>

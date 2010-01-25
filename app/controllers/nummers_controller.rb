@@ -3,6 +3,8 @@ class NummersController < ApplicationController
   # GET /nummers.xml
     layout 'standard'
     
+    before_filter :authorize, :except => [:index, :show]
+    
   def index
     @pagina = params[:pagina].to_i
     @nummers = Nummer.all(:limit => 50, :offset => @pagina * 50)

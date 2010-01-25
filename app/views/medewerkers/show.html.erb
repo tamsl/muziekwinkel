@@ -1,4 +1,9 @@
 <p>
+  <b>Login:</b>
+  <%=h @medewerker.login %>
+</p>
+
+<p>
   <b>Password:</b>
   <%=h @medewerker.password %>
 </p>
@@ -8,6 +13,10 @@
   <%=h @medewerker.email %>
 </p>
 
+<p>
+  <b>Type:</b>
+  <%=h @medewerker.type %>
+</p>
 
 <%= link_to 'Edit', edit_medewerker_path(@medewerker) %> |
 <%= link_to 'Back', medewerkers_path %>
