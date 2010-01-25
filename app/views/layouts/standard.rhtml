@@ -71,7 +71,7 @@ function play(file, artiest, titel) {
 	loadSWF("SimpleMP3_01.swf", "previewplayer", file, artiest, titel);
 }
 
-$(function() { play('hot.mp3', 'None', 'None')});
+$(function() { play('None', 'None', 'None')});
 </script>
 
 </head>
@@ -225,25 +225,27 @@ $(function() { play('hot.mp3', 'None', 'None')});
 </table>
 
 </div>
+
 <p class="right_head">Nieuwe albums</p>
 <div class="right_body">
+<% for album in Album.all(:order => 'jaar DESC', :limit => 2) %>
 <table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px" >
   <tr>
-    <td rowspan="5" style="background-color:#ffffff; width:100px"><img src="cover.jpg" width="100" height="100" alt="cover" /></td>
+    <td rowspan="5" style="background-color:#ffffff; width:100px"><%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '100px', :height => '100px') %></td>
     <td style="width:35px">artiest:</td>
-    <td style="width:199px">Monolake</td>
+    <td style="width:199px"><%=h album.artiest %></td>
   </tr>
   <tr>
     <td>album:</td>
-    <td>Hong Kong</td>
+    <td><%=h album.titel %></td>
   </tr>
   <tr>
     <td>genre:</td>
-    <td>Ambient</td>
+    <td><%=h album.genre %></td>
   </tr>
   <tr>
     <td>prijs:</td>
-    <td>12,- euro</td>
+    <td><%=h album.prijs %></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -251,50 +253,30 @@ $(function() { play('hot.mp3', 'None', 'None')});
   </tr>
 </table>
 <br />
-<table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px">
-  <tr>
-    <td rowspan="5" style="background-color:#ffffff; width:100px"><img src="front.jpg" width="100" height="100" alt="cover" /></td>
-    <td style="width:35px">artiest:</td>
-    <td style="width:199px">Systems Officer</td>
-  </tr>
-  <tr>
-    <td>album:</td>
-    <td>Underslept</td>
-  </tr>
-  <tr>
-    <td>genre:</td>
-    <td>Rock</td>
-  </tr>
-  <tr>
-    <td>prijs:</td>
-    <td>goedkoop</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><div class="koopknop"> kopen</div></td>
-  </tr>
-</table>
-
+<% end %>
 </div>
+
 <p class="right_head">Meest verkocht</p>
 <div class="right_body">
-<table border="0" cellpadding="3" cellspacing="0" style="background-color:#ffffff; width:360px">
+
+<% for album in Album.all.sort_by { |a| a.aankoops.count }.reverse[0..1] %>
+<table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px" >
   <tr>
-    <td rowspan="5" style="background-color:#ffffff; width:100px"><img src="Dixon temporary Secretary.jpg" width="100" height="100" alt="cover" /></td>
+    <td rowspan="5" style="background-color:#ffffff; width:100px"><%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '100px', :height => '100px') %></td>
     <td style="width:35px">artiest:</td>
-    <td style="width:199px">Dixon</td>
+    <td style="width:199px"><%=h album.artiest %></td>
   </tr>
   <tr>
     <td>album:</td>
-    <td>Temporary Secretary</td>
+    <td><%=h album.titel %></td>
   </tr>
   <tr>
     <td>genre:</td>
-    <td>House</td>
+    <td><%=h album.genre %></td>
   </tr>
   <tr>
     <td>prijs:</td>
-    <td>12,- euro</td>
+    <td><%=h album.prijs %></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -302,31 +284,9 @@ $(function() { play('hot.mp3', 'None', 'None')});
   </tr>
 </table>
 <br />
-<table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px">
-  <tr>
-    <td rowspan="5" style="background-color:#ffffff; width:100px"><img src="Folder.jpg" width="100" height="100" alt="cover" /></td>
-    <td style="width:35px">artiest:</td>
-    <td style="width:199px">Len Faki</td>
-  </tr>
-  <tr>
-    <td>album:</td>
-    <td>Berghain 03</td>
-  </tr>
-  <tr>
-    <td>genre:</td>
-    <td>Techno</td>
-  </tr>
-  <tr>
-    <td>prijs:</td>
-    <td>13,- euro</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><div class="koopknop"> kopen</div> </td>
-  </tr>
-</table>
+<% end %>
 </div>
-</div>
+
 <div id="footer"></div>
 <div class="bottommp3spacer"></div>
 </div>
