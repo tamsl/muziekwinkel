@@ -55,8 +55,8 @@
 <div class="searchmenu">
   <ul class="nav">
     <li class="nav4 drop"><a class="main down" href="/klants"><b>User</b></a>
-      <ul><li><%= link_to '<b>Winkelmandje</b>', klant_aankoops_url(current_user.id) + '/onbetaald' %></li>
-          <li><%= link_to '<b>Aankopen</b>', klant_aankoops_url(current_user.id) %></li>
+      <ul><li><%= link_to '<b>Winkelmandje</b>', klant_aankoops_url(self.current_user.object_id) + '/onbetaald' %></li>
+          <li><%= link_to '<b>Aankopen</b>', klant_aankoops_url(self.current_user.object_id) %></li>
           <li><a href=" "><b>Voorkeuren</b></a></li>
       </ul>
     </li>
