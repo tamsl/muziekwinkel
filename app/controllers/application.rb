@@ -13,22 +13,17 @@ class ApplicationController < ActionController::Base
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
-  
-  helper_method :user_is_medewerker?
-  
+ 
     protected
     
     def authorize
-	unless user_is_medewerker?
-	  redirect_back_or_default('/')
-	  false
-	end
+	  unless user_is_medewerker?
+	    redirect_back_or_default('/')
+	    false
+	  end
     end
-  
+
     def user_is_medewerker?
-       #session[:user_id] && (user = User.find(session[:user_id])) && user.type
-      if logged_in? && current_user.login == "medewerker"
-	true
-      end
+        session[:user_id] && current_user.class == Medewerker
     end
 end
