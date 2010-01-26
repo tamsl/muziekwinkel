@@ -5,30 +5,32 @@ class AlbumsController < ApplicationController
     
     before_filter :authorize, :except => [:index, :show]
     
-    def index
+  def index
     @albums = Album.find(:all)
+    @listnav = true
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.xml  { render :xml => @albums }
     end
   end
   
   def nieuwe
     @albums = Album.all(:order =>"jaar DESC", :limit => 10)
+    @listnav = false
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :action => :index }
       format.xml  { render :xml => @albums }
     end
   end
   
   def bestverkocht
     @albums = Album.all.sort_by { |a| a.aankoops.count }.reverse[0..9]
-
+    @listnav = false
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :action => :index }
       format.xml  { render :xml => @albums }
     end
   end
@@ -42,9 +44,10 @@ class AlbumsController < ApplicationController
           x
         end
     }.reverse[0..9]
-    
+    @listnav = false
+
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :action => :index }
       format.xml  { render :xml => @albums }
     end
   end

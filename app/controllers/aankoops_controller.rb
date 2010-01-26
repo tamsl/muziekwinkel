@@ -6,7 +6,11 @@ class AankoopsController < ApplicationController
     before_filter :authorize
 
   def index
-    @aankoops = Aankoop.find(:all)
+    if params[:klant_id]
+      @aankoops = Klant.find(params[:klant_id]).aankoops
+    else
+      @aankoops = Aankoop.find(:all)
+    end
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,305 +1,180 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
+  <head>
     <base href="http://localhost:3000" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Muziekwinkel</title>
-<%= stylesheet_link_tag :all %>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function()
-{
-   //hide the all of the element with class msg_body
-   $(".right_body").hide();
-   //toggle the componenet with class msg_body
-   $(".right_head").click(function()
-   {
-        $(this).next(".right_body").slideToggle(400);
-   });
-      $(".rightsearch_head").click(function()
-   {
-        $(this).next(".rightsearch_body").slideToggle(400);
-   });
- });
-</script>
-<script type="text/javascript" src="swfobject.js"></script>
-<script type="text/javascript">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Muziekwinkel</title>
+    <%= stylesheet_link_tag :all %>
 
-//Support function: checks to see if target
-//element is an object or embed element
-function isObject(targetID){
-   var isFound = false;
-   var el = document.getElementById(targetID);
-   if(el && (el.nodeName === "OBJECT" || el.nodeName === "EMBED")){
-      isFound = true;
-   }
-   return isFound;
-}
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+           //hide the all of the element with class msg_body
+           $(".right_body").hide();
+           //toggle the componenet with class msg_body
+           $(".right_head").click(function()
+           {
+                $(this).next(".right_body").slideToggle(400);
+           });
+              $(".rightsearch_head").click(function()
+           {
+                $(this).next(".rightsearch_body").slideToggle(400);
+           });
+         });
+    </script>
+    <script type="text/javascript" src="swfobject.js"></script>
+    <script type="text/javascript">
+        //Support function: checks to see if target
+        //element is an object or embed element
+        function isObject(targetID){
+           var isFound = false;
+           var el = document.getElementById(targetID);
+           if(el && (el.nodeName === "OBJECT" || el.nodeName === "EMBED")){
+              isFound = true;
+           }
+           return isFound;
+        }
 
-//Support function: creates an empty
-//element to replace embedded SWF object
-function replaceSwfWithEmptyDiv(targetID){
-   var el = document.getElementById(targetID);
-   if(el){
-      var div = document.createElement("div");
-      el.parentNode.insertBefore(div, el);
- 
-      //Remove the SWF
-      swfobject.removeSWF(targetID);
-   
-      //Give the new DIV the old element's ID
-      div.setAttribute("id", targetID);
-   }
-}
+        //Support function: creates an empty
+        //element to replace embedded SWF object
+        function replaceSwfWithEmptyDiv(targetID){
+           var el = document.getElementById(targetID);
+           if(el){
+              var div = document.createElement("div");
+              el.parentNode.insertBefore(div, el);
+              swfobject.removeSWF(targetID);
+              div.setAttribute("id", targetID);
+           }
+        }
 
-function loadSWF(url, targetID, file, artiest, titel){
-   //Check for existing SWF
-   if(isObject(targetID)){
-      //replace object/element with a new div
-      replaceSwfWithEmptyDiv(targetID);
-   } 
-   //Embed SWF
-   if (swfobject.hasFlashPlayerVersion("7")) {
-      var params = { flashvars:"titel=" + titel + "&artiest=" + artiest + "&mp3=" + file};
-      var attributes = { data: url, width:"960", height:"80" };
-      var obj = swfobject.createSWF(attributes, params, targetID);
-   }
-}
+        function loadSWF(url, targetID, file, artiest, titel){
+           //Check for existing SWF
+           if(isObject(targetID)){
+              //replace object/element with a new div
+              replaceSwfWithEmptyDiv(targetID);
+           } 
+           //Embed SWF
+           if (swfobject.hasFlashPlayerVersion("7")) {
+              var params = { flashvars:"titel=" + titel + "&artiest=" + artiest + "&mp3=" + file};
+              var attributes = { data: url, width:"960", height:"80" };
+              var obj = swfobject.createSWF(attributes, params, targetID);
+           }
+        }
 
-function play(file, artiest, titel) {
-	loadSWF("SimpleMP3_01.swf", "previewplayer", file, artiest, titel);
-}
+        function play(file, artiest, titel) {
+            loadSWF("SimpleMP3_01.swf", "previewplayer", file, artiest, titel);
+        }
 
-$(function() { play('None', 'None', 'None')});
-</script>
+        $(function() { play('None', 'None', 'None')});
+    </script>
+  </head>
+  <body>
+    <div class="container"> 
+      <div class="header"> </div>
+      <div class="menu">
+        <%= render :partial => 'layouts/menu' %>
+      </div>
 
-</head>
-<body>
-<div class="container"> 
-<div class="header"> </div>
-<div class="menu">
-<div class="leftmenu">
-    <ul class="nav">
-        <li class="nav1 drop"><a class="main" href="/home"><b>Home</b></a></li>
-        
-        <li class="nav3 drop"><a class="main" href="/artiests"><b>Artiesten</b></a>
-    
-        </li>
-        <li class="nav3 drop"><a class="main down" href="/albums"><b>Albums</b></a>
-            <ul>
-                        <li><a href="/albums/nieuwe"><b>Nieuwe albums</b></a></li>
-						<li><a href="/albums/uitgelicht"><b>Uitgelicht</b></a></li>
-                        <li><a href="/albums/bestverkocht"><b>Best verkocht</b></a></li>
-					    <li><a href="/albums/bestrating"><b>Hoogst gewaardeerd</b></a></li>
-            </ul>
-        </li>
-        <li class="nav3 drop"><a class="main down" href="/nummers"><b>Genres</b></a>
-            <ul>                
-            <li class="fly"><a class="main" href=" "><b>Overige</b></a>
-                <ul>
-                        <li><a href="/genre/blues"><b>Blues</b></a></li>
-                        <li><a href="/genre/country"><b>Country</b></a></li>               
-                        <li><a href="/genre/diversen"><b>Diversen </b></a></li>
-                        <li><a href="/genre/folk"><b>Folk </b></a></li>                 
-                        <li><a href="/genre/kind & jeugd"><b>Kind &amp; Jeugd </b></a></li>                           
-                        <li><a href="/genre/new age"><b>New Age </b></a></li>               
-                        <li><a href="/genre/rap & hip hop"><b>Rap &amp; Hip Hop </b></a></li>
-                        <li><a href="/genre/r&b & soul"><b>R&amp;B &amp; Soul </b></a></li>
-                        <li><a href="/genre/reggae"><b>Reggae </b></a></li>
-                        <li><a href="/genre/religieus"><b>Religieus </b></a></li>       
-                        <li><a href="/genre/soundtracks & musicals"><b>Soundtracks &amp; Musicals </b></a></li>
-                        <li><a href="/genre/verzamel-cd's & boxsets"><b>Verzamel-cd's &amp; Boxsets </b></a></li>
-                        <li><a href="/genre/wereldmuziek"><b>Wereldmuziek</b></a></li>
-                </ul>
-            </li>
-                <li><a href="/genre/pop"><b>Pop </b></a></li>
-                <li><a href="/genre/klassiek"><b>Klassiek </b></a></li>
-                <li><a href="/genre/nederlands"><b>Nederlands </b></a></li>
-                <li><a href="/genre/rock & alternative"><b>Rock &amp; Alternative </b></a></li>
-                <li><a href="/genre/jazz"><b>Jazz </b></a></li>
-                <li><a href="/genre/dance"><b>Dance </b></a></li>
-                
-            </ul>
-        </li>
-        <li class="nav2 drop"><a class="main" href=" "><b>Charts</b></a></li>
-        
-        <li class="nav5 drop"><a class="main" href="/disclaimer"><b>Disclaimer</b></a></li>
-    </ul>
-</div>
+      <div class="inhoud"> <!-- alles onder het menu-->
+        <div class="inhoud_text_links"> <!-- hier komen de views-->
+          <%= yield -%>
+        </div>
 
-<div class="login">
-<form action="/session" method="post"><p>
-	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>"/> &nbsp;user: <input id="login" name="login" type="text" class="input"/> wachtwoord: <input type="password" id="password" name="password" class="input" /></p> <div class="button">
-	<input name="commit" type="submit" value="Log in"/>
-</div></form>
+        <div class="right_menus"><!-- rechter uitvouw deel, zoek nieuw top-->
+          <p class="rightsearch_head">Zoeken</p>
+          
+          <div class="rightsearch_body">
+            <form action="/search" method="get">
+              <table border="0" cellspacing="0" cellpadding="3" style="width:342px">
+                <tr><td style="width:47px">artiest:</td>
+                    <td style="width:283px"><input name="artiest" type="text" class="zoekveld_rechts" size="10" /></td></tr>
+                <tr><td>album: </td>
+                    <td><input name="album" type="text" class="zoekveld_rechts" size="10"/></td></tr>
+                <tr><td>song:</td>
+                    <td><input name="song" type="text" class="zoekveld_rechts" size="10" />
+                        <input name="zoek" type="submit" value="Zoek" class="zoekveld_submit" /></td></tr>
+              </table>
+            </form>
+          </div>
 
-</div>
-<div class="searchmenu">
-<ul class="nav">
-<li class="nav4 drop"><a class="main down" href="/klants"><b>User</b></a>
-            <ul>
-                <li><a href=" "><b>Winkelmandje</b></a></li>
-                <li><a href=" "><b>Aankopen</b></a></li>
-                <li><a href=" "><b>Voorkeuren</b></a></li>
-            </ul>
-        </li>
-    </ul>
-</div>
-</div>
+          <p class="right_head">Uitgelichte albums</p>
+          <div class="right_body">
+            <table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px">
+              <tr>
+                <td rowspan="5" style="background-color:#ffffff; width:100px"><img src="cover.jpg" width="100" height="100" alt="cover" /></td>
+                <td style="width:35px">artiest:</td>
+                <td style="width:199px">Monolake</td>
+              </tr>
+              <tr>
+                <td>album:</td>
+                <td>Hong Kong</td>
+              </tr>
+              <tr>
+                <td>genre:</td>
+                <td>Ambient</td>
+              </tr>
+              <tr>
+                <td>prijs:</td>
+                <td>12,- euro</td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td><div class="koopknop"> kopen</div> </td>
+              </tr>
+            </table>
+            <br />
+            <table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px">
+              <tr>
+                <td rowspan="5" style="background-color:#ffffff; width:100px"><img src="front.jpg" width="100" height="100" alt="cover" /></td>
+                <td style="width:35px">artiest:</td>
+                <td style="width:199px">Systems Officer</td>
+              </tr>
+              <tr>
+                <td>album:</td>
+                <td>Underslept</td>
+              </tr>
+              <tr>
+                <td>genre:</td>
+                <td>Rock</td>
+              </tr>
+              <tr>
+                <td>prijs:</td>
+                <td>goedkoop</td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td><div class="koopknop"> kopen</div> </td>
+              </tr>
+            </table>
+          </div>
 
-<div class="inhoud"> <!-- alles onder het menu-->
-  <div class="inhoud_text_links"> <!-- hier komen de views-->
-  <%= yield -%>
-</div>
+          <p class="right_head">Nieuwe albums</p>
+          <div class="right_body">
+            <% for album in Album.all(:order => 'jaar DESC', :limit => 2) %>
+              <%= render :partial => 'albums/album', :locals => {:album => album} %>
+            <% end %>
+          </div>
 
-<div class="right_menus"><!-- rechter uitvouw deel, zoek nieuw top-->
-<p class="rightsearch_head">Zoeken</p><div class="rightsearch_body">
+          <p class="right_head">Meest verkocht</p>
+          <div class="right_body">
+            <% for album in Album.all.sort_by { |a| a.aankoops.count }.reverse[0..1] %>
+              <%= render :partial => 'albums/album', :locals => {:album => album} %>
+            <% end %>
+          </div>
 
-<form action="/search" method="get">
-<table border="0" cellspacing="0" cellpadding="3" style="width:342px">
-  <tr>
-    <td style="width:47px">artiest:</td>
-    <td style="width:283px"><input name="artiest" type="text" class="zoekveld_rechts" size="10" /></td>
-  </tr>
-  <tr>
-    <td>album: </td>
-    <td><input name="album" type="text" class="zoekveld_rechts" size="10"/></td>
-  </tr>
-  <tr>
-    <td>song:</td>
-    <td><input name="song" type="text" class="zoekveld_rechts" size="10" />
-      <input name="zoek" type="submit" value="Zoek" class="zoekveld_submit" /></td>
-  </tr>
-</table>
-</form>
-</div>
-<p class="right_head">Uitgelichte albums</p>
-<div class="right_body">
-<table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px">
-  <tr>
-    <td rowspan="5" style="background-color:#ffffff; width:100px"><img src="cover.jpg" width="100" height="100" alt="cover" /></td>
-    <td style="width:35px">artiest:</td>
-    <td style="width:199px">Monolake</td>
-  </tr>
-  <tr>
-    <td>album:</td>
-    <td>Hong Kong</td>
-  </tr>
-  <tr>
-    <td>genre:</td>
-    <td>Ambient</td>
-  </tr>
-  <tr>
-    <td>prijs:</td>
-    <td>12,- euro</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><div class="koopknop"> kopen</div> </td>
-  </tr>
-</table>
-<br />
-<table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px">
-  <tr>
-    <td rowspan="5" style="background-color:#ffffff; width:100px"><img src="front.jpg" width="100" height="100" alt="cover" /></td>
-    <td style="width:35px">artiest:</td>
-    <td style="width:199px">Systems Officer</td>
-  </tr>
-  <tr>
-    <td>album:</td>
-    <td>Underslept</td>
-  </tr>
-  <tr>
-    <td>genre:</td>
-    <td>Rock</td>
-  </tr>
-  <tr>
-    <td>prijs:</td>
-    <td>goedkoop</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><div class="koopknop"> kopen</div> </td>
-  </tr>
-</table>
+          <div id="footer"></div>
+          <div class="bottommp3spacer"></div>
+        </div>
 
-</div>
+        <div class="bgwhite"></div>
 
-<p class="right_head">Nieuwe albums</p>
-<div class="right_body">
-<% for album in Album.all(:order => 'jaar DESC', :limit => 2) %>
-<table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px" >
-  <tr>
-    <td rowspan="5" style="background-color:#ffffff; width:100px"><%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '100px', :height => '100px') %></td>
-    <td style="width:35px">artiest:</td>
-    <td style="width:199px"><%=h album.artiest %></td>
-  </tr>
-  <tr>
-    <td>album:</td>
-    <td><%=h album.titel %></td>
-  </tr>
-  <tr>
-    <td>genre:</td>
-    <td><%=h album.genre %></td>
-  </tr>
-  <tr>
-    <td>prijs:</td>
-    <td><%=h album.prijs %></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><div class="koopknop"> kopen</div> </td>
-  </tr>
-</table>
-<br />
-<% end %>
-</div>
-
-<p class="right_head">Meest verkocht</p>
-<div class="right_body">
-
-<% for album in Album.all.sort_by { |a| a.aankoops.count }.reverse[0..1] %>
-<table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px" >
-  <tr>
-    <td rowspan="5" style="background-color:#ffffff; width:100px"><%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '100px', :height => '100px') %></td>
-    <td style="width:35px">artiest:</td>
-    <td style="width:199px"><%=h album.artiest %></td>
-  </tr>
-  <tr>
-    <td>album:</td>
-    <td><%=h album.titel %></td>
-  </tr>
-  <tr>
-    <td>genre:</td>
-    <td><%=h album.genre %></td>
-  </tr>
-  <tr>
-    <td>prijs:</td>
-    <td><%=h album.prijs %></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><div class="koopknop"> kopen</div> </td>
-  </tr>
-</table>
-<br />
-<% end %>
-</div>
-
-<div id="footer"></div>
-<div class="bottommp3spacer"></div>
-</div>
-
-<div class="bgwhite">
-
-</div>
-
-<div class="mp3player">
-	<div id="previewplayer">
-Download adobe flash player voor de nummer previews.
-</div>
-</div>
-</div>
-</body>
+        <div class="mp3player"><div id="previewplayer">
+          Download adobe flash player voor de nummer previews.
+        </div></div>
+      </div>
+    </div>
+  </body>
 </html>
