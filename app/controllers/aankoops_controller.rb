@@ -2,7 +2,9 @@ class AankoopsController < ApplicationController
   # GET /aankoops
   # GET /aankoops.xml
     layout 'standard'
-  
+
+    before_filter :authorize
+
   def index
     @aankoops = Aankoop.find(:all)
 

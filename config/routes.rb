@@ -22,12 +22,14 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'albums/bestrating', :controller => "albums", :action => "bestrating" 
 
   map.resources :medewerkers
-  map.resources :albums
   map.resources :nummers
   map.resources :products
   map.resources :commentaars
   map.resources :aankoops
-  map.resources :klants
+
+  map.resources :albums,      :has_many => :nummers
+  map.resources :klants,      :has_many => :aankoops
+  map.resources :medewerkers, :has_many => :aankoops
 
   map.root :controller => "home"
   # The priority is based upon order of creation: first created -> highest priority.

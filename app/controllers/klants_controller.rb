@@ -3,7 +3,8 @@ class KlantsController < ApplicationController
   # GET /klants.xml
     layout 'standardklants'
     
-    before_filter :authorize, :except => [:login, :signup, :new, :logout]
+    before_filter :authorize, :only => [:index]
+    before_filter :user_authorize, :only => [:show, :edit]
  
   def index
     @klants = Klant.find(:all)

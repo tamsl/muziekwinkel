@@ -18,12 +18,19 @@ class ApplicationController < ActionController::Base
     
     def authorize
 	  unless user_is_medewerker?
-	    redirect_back_or_default('/')
+	    redirect_back_or_default('/login')
 	    false
 	  end
     end
 
+    def user_authorize
+      unless user_is_medewerker? or current_user.id == params[:id].to_i
+        redirect_back_or_default('/login')
+        false
+      end
+    end
+
     def user_is_medewerker?
-        session[:user_id] && current_user.class == Medewerker
+        session[:user_id] and current_user.class == Medewerker
     end
 end
