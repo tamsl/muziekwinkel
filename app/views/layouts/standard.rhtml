@@ -2,12 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <base href="http://localhost:3000" />
+		<script language="javascript">
+// if(self.location==top.location)self.location="frameset.html";
+</script>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Muziekwinkel</title>
 <%= stylesheet_link_tag :all %>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
 <script type="text/javascript">
+	
+	
 $(document).ready(function()
 {
    //hide the all of the element with class msg_body
@@ -89,7 +94,7 @@ $(function() { play('None', 'None', 'None')});
         <li class="nav3 drop"><a class="main down" href="/albums"><b>Albums</b></a>
             <ul>
                         <li><a href="/albums/nieuwe"><b>Nieuwe albums</b></a></li>
-						<li><a href="/albums/uitgelicht"><b>Uitgelicht</b></a></li>
+						<li><a href="/uitgelicht"><b>Uitgelicht</b></a></li>
                         <li><a href="/albums/bestverkocht"><b>Best verkocht</b></a></li>
 					    <li><a href="/albums/bestrating"><b>Hoogst gewaardeerd</b></a></li>
             </ul>
@@ -104,19 +109,19 @@ $(function() { play('None', 'None', 'None')});
                         <li><a href="/genre/folk"><b>Folk </b></a></li>                 
                         <li><a href="/genre/kind & jeugd"><b>Kind &amp; Jeugd </b></a></li>                           
                         <li><a href="/genre/new age"><b>New Age </b></a></li>               
-                        <li><a href="/genre/rap & hip hop"><b>Rap &amp; Hip Hop </b></a></li>
-                        <li><a href="/genre/r&b & soul"><b>R&amp;B &amp; Soul </b></a></li>
+                        <li><a href="/genre/rap &amp; Hiphop"><b>Rap &amp; Hiphop </b></a></li>
+                        <li><a href="/genre/r&amp;b &amp; soul"><b>R&amp;B &amp; Soul </b></a></li>
                         <li><a href="/genre/reggae"><b>Reggae </b></a></li>
                         <li><a href="/genre/religieus"><b>Religieus </b></a></li>       
-                        <li><a href="/genre/soundtracks & musicals"><b>Soundtracks &amp; Musicals </b></a></li>
-                        <li><a href="/genre/verzamel-cd's & boxsets"><b>Verzamel-cd's &amp; Boxsets </b></a></li>
+                        <li><a href="/genre/soundtracks &amp; musicals"><b>Soundtracks &amp; Musicals </b></a></li>
+                        <li><a href="/genre/verzamel-cd's &amp; boxsets"><b>Verzamel-cd's &amp; Boxsets </b></a></li>
                         <li><a href="/genre/wereldmuziek"><b>Wereldmuziek</b></a></li>
                 </ul>
             </li>
                 <li><a href="/genre/pop"><b>Pop </b></a></li>
                 <li><a href="/genre/klassiek"><b>Klassiek </b></a></li>
                 <li><a href="/genre/nederlands"><b>Nederlands </b></a></li>
-                <li><a href="/genre/rock & alternative"><b>Rock &amp; Alternative </b></a></li>
+                <li><a href="/genre/rock &amp; alternative"><b>Rock &amp; Alternative </b></a></li>
                 <li><a href="/genre/jazz"><b>Jazz </b></a></li>
                 <li><a href="/genre/dance"><b>Dance </b></a></li>
                 
@@ -127,14 +132,8 @@ $(function() { play('None', 'None', 'None')});
         <li class="nav5 drop"><a class="main" href="/disclaimer"><b>Disclaimer</b></a></li>
     </ul>
 </div>
-
-<div class="login">
-<form action="/session" method="post"><p>
-	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>"/> &nbsp;user: <input id="login" name="login" type="text" class="input"/> wachtwoord: <input type="password" id="password" name="password" class="input" /></p> <div class="button">
-	<input name="commit" type="submit" value="Log in"/>
-</div></form>
-
-</div>
+<% if logged_in? %>
+<div class="login"><strong>Ingelogd als: <%=h current_user.login %></strong> <div class="button2"><%= link_to '<input name="hoi" type="submit" value="Log uit"/>', logout_path %></div></div>
 <div class="searchmenu">
 <ul class="nav">
 <li class="nav4 drop"><a class="main down" href="/klants"><b>User</b></a>
@@ -142,10 +141,20 @@ $(function() { play('None', 'None', 'None')});
                 <li><a href=" "><b>Winkelmandje</b></a></li>
                 <li><a href=" "><b>Aankopen</b></a></li>
                 <li><a href=" "><b>Voorkeuren</b></a></li>
+				<li><%= link_to '<b>Verander wachtwoord</b>', change_password_path %></li>
+                <li><%= link_to '<b>Reset wachtwoord</b>', reset_password_path %></li>
+				<li><%= link_to '<b>Log uit</b>', logout_path %></li>
             </ul>
         </li>
     </ul>
 </div>
+<% else %><div class="login">
+<form action="/session" method="post"><p><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>"/> &nbsp;user: <input id="login" name="login" type="text" class="input"/> wachtwoord: <input type="password" id="password" name="password" class="input" /></p>
+<div class="button2"><%= link_to '<input name="hoi" type="submit" value="Signup"/>', signup_path %></div>
+<div class="login" style="float:right;"><p>&nbsp;or </p></div> <div class="button"><input name="commit" type="submit" value="Log in"/></div></form></div>
+<% end %>
+
+
 </div>
 
 <div class="inhoud"> <!-- alles onder het menu-->
@@ -154,7 +163,7 @@ $(function() { play('None', 'None', 'None')});
 </div>
 
 <div class="right_menus"><!-- rechter uitvouw deel, zoek nieuw top-->
-<p class="rightsearch_head">Zoeken</p><div class="rightsearch_body">
+<p class="rightsearch_head">Zoeken <img src="images/downarrow.png" border="0px" hspace="2px" align="right"/></p><div class="rightsearch_body">
 
 <form action="/search" method="get">
 <table border="0" cellspacing="0" cellpadding="3" style="width:342px">
@@ -174,7 +183,7 @@ $(function() { play('None', 'None', 'None')});
 </table>
 </form>
 </div>
-<p class="right_head">Uitgelichte albums</p>
+<p class="right_head">Uitgelichte albums <img src="images/downarrow.png" border="0px" hspace="2px" align="right"/></p>
 <div class="right_body">
 <table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px">
   <tr>
@@ -226,12 +235,12 @@ $(function() { play('None', 'None', 'None')});
 
 </div>
 
-<p class="right_head">Nieuwe albums</p>
+<p class="right_head">Nieuwe albums <img src="images/downarrow.png" border="0px" hspace="2px" align="right"/></p>
 <div class="right_body">
 <% for album in Album.all(:order => 'jaar DESC', :limit => 2) %>
 <table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px" >
   <tr>
-    <td rowspan="5" style="background-color:#ffffff; width:100px"><%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '100px', :height => '100px') %></td>
+    <td rowspan="5" style="background-color:#ffffff; width:100px"><%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '100px', :height => '100px', :border => '0px'), :controller => 'Albums', :action => 'show', :id => album %></td>
     <td style="width:35px">artiest:</td>
     <td style="width:199px"><%=h album.artiest %></td>
   </tr>
@@ -249,20 +258,20 @@ $(function() { play('None', 'None', 'None')});
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td><div class="koopknop"> kopen</div> </td>
+    <td><div class="numkoopknop"></div> </td>
   </tr>
 </table>
 <br />
 <% end %>
 </div>
 
-<p class="right_head">Meest verkocht</p>
+<p class="right_head">Meest verkocht <img src="images/downarrow.png" border="0px" hspace="2px" align="right"/></p>
 <div class="right_body">
 
 <% for album in Album.all.sort_by { |a| a.aankoops.count }.reverse[0..1] %>
 <table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px" >
   <tr>
-    <td rowspan="5" style="background-color:#ffffff; width:100px"><%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '100px', :height => '100px') %></td>
+    <td rowspan="5" style="background-color:#ffffff; width:100px"><%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '100px', :height => '100px', :border => '0px'), :controller => 'Albums', :action => 'show', :id => album %></td>
     <td style="width:35px">artiest:</td>
     <td style="width:199px"><%=h album.artiest %></td>
   </tr>
@@ -280,7 +289,7 @@ $(function() { play('None', 'None', 'None')});
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td><div class="koopknop"> kopen</div> </td>
+    <td><div class="numkoopknop"></div> </td>
   </tr>
 </table>
 <br />
@@ -290,16 +299,10 @@ $(function() { play('None', 'None', 'None')});
 <div id="footer"></div>
 <div class="bottommp3spacer"></div>
 </div>
-
 <div class="bgwhite">
-
 </div>
 
-<div class="mp3player">
-	<div id="previewplayer">
-Download adobe flash player voor de nummer previews.
-</div>
-</div>
+
 </div>
 </body>
 </html>
