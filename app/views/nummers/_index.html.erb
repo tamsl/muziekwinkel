@@ -4,7 +4,7 @@
   <tr>
     <td><%= h nummer.tracknr %>.</td><td><%= h nummer.artiest %>&nbsp;-&nbsp;<%= h nummer.titel %>&nbsp;</td>
 	    <td align="right" ><%= h nummer.lengte %> </td>
-<td width="81px"align="right"><a href="javascript:play('hot.mp3', '<%= h escape_javascript nummer.artiest %>', '<%= h escape_javascript nummer.titel %>')"><div class="playknop"></div></a><div class="numkoopknop"></div></td>
+<td width="81px"align="right"><a href="javascript:parent.mp3playa.play('hot.mp3', '<%= h escape_javascript nummer.artiest %>', '<%= h escape_javascript nummer.titel %>')"><div class="playknop"></div></a><div class="numkoopknop"></div></td>
   </tr>
 <% end %>
 

@@ -70,6 +70,9 @@
 
         $(function() { play('None', 'None', 'None')});
     </script>
+    <script language="javascript">
+        if(self.location==top.location)self.location="frameset.html";
+    </script>
   </head>
   <body>
     <div class="container"> 
@@ -100,7 +103,7 @@
             </form>
           </div>
 
-          <p class="right_head">Uitgelichte albums</p>
+          <p class="right_head">Uitgelichte albums <img src="images/downarrow.png" border="0px" hspace="2px" align="right"/></p>
           <div class="right_body">
             <table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px">
               <tr>
@@ -151,14 +154,14 @@
             </table>
           </div>
 
-          <p class="right_head">Nieuwe albums</p>
+          <p class="right_head">Nieuwe albums <img src="images/downarrow.png" border="0px" hspace="2px" align="right"/></p>
           <div class="right_body">
             <% for album in Album.all(:order => 'jaar DESC', :limit => 2) %>
               <%= render :partial => 'albums/album', :locals => {:album => album} %>
             <% end %>
           </div>
 
-          <p class="right_head">Meest verkocht</p>
+          <p class="right_head">Meest verkocht <img src="images/downarrow.png" border="0px" hspace="2px" align="right"/></p>
           <div class="right_body">
             <% for album in Album.all.sort_by { |a| a.aankoops.count }.reverse[0..1] %>
               <%= render :partial => 'albums/album', :locals => {:album => album} %>
@@ -171,9 +174,6 @@
 
         <div class="bgwhite"></div>
 
-        <div class="mp3player"><div id="previewplayer">
-          Download adobe flash player voor de nummer previews.
-        </div></div>
       </div>
     </div>
   </body>
