@@ -99,8 +99,8 @@
 
           <p class="right_head">Uitgelichte albums <img src="images/downarrow.png" border="0px" hspace="2px" align="right"/></p>
           <div class="right_body">
-            <% for uitgelicht in Uitgelicht.all(:limit => 2) %>
-             <% render :partial => 'albums/album', :locals => {:album => uitgelicht.album} %>
+            <% for uitgelicht in Uitgelicht.all %>
+              <%= render :partial => 'albums/album', :locals => {:album => uitgelicht.album} %>
             <% end %>
           </div>
 
