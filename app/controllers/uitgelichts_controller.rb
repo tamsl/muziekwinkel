@@ -1,4 +1,6 @@
 class UitgelichtsController < ApplicationController
+  layout 'standard'
+
   # GET /uitgelichts
   # GET /uitgelichts.xml
   def index

@@ -3,7 +3,7 @@ class AlbumsController < ApplicationController
   # GET /albums.xml
     layout 'standard'
     
-    before_filter :authorize, :except => [:index, :show]
+    before_filter :authorize, :except => [:index, :show, :bestverkocht, :bestrating, :nieuwe, :uitgelicht]
     
   def index
     @albums = Album.find(:all)
@@ -52,6 +52,15 @@ class AlbumsController < ApplicationController
     end
   end
 
+  def uitgelicht
+    @albums = Uitgelicht.all.collect { |u| u.album }
+    @listnav = false
+
+    respond_to do |format|
+      format.html
+      format.xml  { render :xml => @albums } 
+    end
+  end
   
   # GET /albums/1
   # GET /albums/1.xml

@@ -15,21 +15,21 @@
                 <li><a href="/genre/country"><b>Country</b></a></li>               
                 <li><a href="/genre/diversen"><b>Diversen </b></a></li>
                 <li><a href="/genre/folk"><b>Folk </b></a></li>                 
-                <li><a href="/genre/kind & jeugd"><b>Kind &amp; Jeugd </b></a></li>                           
+                <li><a href="/genre/kind &amp; jeugd"><b>Kind &amp; Jeugd </b></a></li>                           
                 <li><a href="/genre/new age"><b>New Age </b></a></li>               
-                <li><a href="/genre/rap & hip hop"><b>Rap &amp; Hip Hop </b></a></li>
-                <li><a href="/genre/r&b & soul"><b>R&amp;B &amp; Soul </b></a></li>
+                <li><a href="/genre/rap &amp; Hiphop"><b>Rap &amp; Hiphop </b></a></li>
+                <li><a href="/genre/r&amp;b &amp; soul"><b>R&amp;B &amp; Soul </b></a></li>
                 <li><a href="/genre/reggae"><b>Reggae </b></a></li>
                 <li><a href="/genre/religieus"><b>Religieus </b></a></li>       
-                <li><a href="/genre/soundtracks & musicals"><b>Soundtracks &amp; Musicals </b></a></li>
-                <li><a href="/genre/verzamel-cd's & boxsets"><b>Verzamel-cd's &amp; Boxsets </b></a></li>
+                <li><a href="/genre/soundtracks &amp; musicals"><b>Soundtracks &amp; Musicals </b></a></li>
+                <li><a href="/genre/verzamel-cd's &amp; boxsets"><b>Verzamel-cd's &amp; Boxsets </b></a></li>
                 <li><a href="/genre/wereldmuziek"><b>Wereldmuziek</b></a></li>
             </ul>
           </li>
           <li><a href="/genre/pop"><b>Pop </b></a></li>
           <li><a href="/genre/klassiek"><b>Klassiek </b></a></li>
           <li><a href="/genre/nederlands"><b>Nederlands </b></a></li>
-          <li><a href="/genre/rock & alternative"><b>Rock &amp; Alternative </b></a></li>
+          <li><a href="/genre/rock &amp; alternative"><b>Rock &amp; Alternative </b></a></li>
           <li><a href="/genre/jazz"><b>Jazz </b></a></li>
           <li><a href="/genre/dance"><b>Dance </b></a></li>
       </ul>
@@ -39,28 +39,34 @@
   </ul>
 </div>
 
-<div class="login">
-  <% if user_logged_in? %>
-    <p>logged in as <%= h current_user.login %> -- <a href="/logout"><button type="button">Logout</button></a></p>
-  <% else %>
-    <form action="/session" method="post"><p>
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>"/> 
+<% if logged_in? %>
+  <div class="login">
+    <strong>Ingelogd als: <%=h current_user.login %></strong>
+    <div class="button2"> <%= link_to '<input name="hoi" type="submit" value="Log uit"/>', logout_path %></div>
+  </div>
+
+  <div class="searchmenu">
+    <ul class="nav">
+      <li class="nav4 drop"><a class="main down" href="/klants"><b>User</b></a>
+        <ul><li><a href=" "><b>Winkelmandje</b></a></li>
+            <li><a href=" "><b>Aankopen</b></a></li>
+            <li><a href=" "><b>Voorkeuren</b></a></li>
+            <li><%= link_to '<b>Verander wachtwoord</b>', change_password_path %></li>
+            <li><%= link_to '<b>Reset wachtwoord</b>', reset_password_path %></li>
+            <li><%= link_to '<b>Log uit</b>', logout_path %></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+<% else %>
+  <div class="login">
+    <form action="/session" method="post">
+      <p><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>"/>
       &nbsp;user: <input id="login" name="login" type="text" class="input"/>
       wachtwoord: <input type="password" id="password" name="password" class="input" /></p>
+      <div class="button2"><%= link_to '<input name="hoi" type="submit" value="Signup"/>', signup_path %></div>
+      <div class="login" style="float:right;"><p>&nbsp;or </p></div>
       <div class="button"><input name="commit" type="submit" value="Log in"/></div>
     </form>
-  <% end %>
-</div>
-
-<div class="searchmenu">
-  <ul class="nav">
-    <li class="nav4 drop"><a class="main down" href="/klants"><b>User</b></a>
-      <% if user_logged_in? %>
-        <ul><li><%= link_to '<b>Winkelmandje</b>', klant_aankoops_url(current_user.id) + '/onbetaald' %></li>
-            <li><%= link_to '<b>Aankopen</b>', klant_aankoops_url(current_user.id) %></li>
-            <li><a href=" "><b>Voorkeuren</b></a></li>
-        </ul>
-      <% end %>
-    </li>
-  </ul>
-</div>
+  </div>
+<% end %>

@@ -4,8 +4,8 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :album_id %><br />
-    <%= f.text_field :album_id %>
+    <%= f.label :album %><br />
+    <%= f.collection_select :album_id, Album.find(:all).sort_by {|item| item.titel}, :id, :titel %>
   </p>
   <p>
     <%= f.label :omschrijving %><br />
