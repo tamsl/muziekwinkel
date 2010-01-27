@@ -33,13 +33,13 @@
     <td>&euro;<%=h album.prijs %></td>
   </tr>
     <td></td>
-    <td><%= link_to 'Show', album %>
+    <td><%= link_to 'Show', album %></td>
+    <td>
         <% if user_is_medewerker? %>
           <%= link_to 'Edit', edit_album_path(album) %>
           <%= link_to 'Destroy', album, :confirm => 'Are you sure?', :method => :delete %>
         <% end %>
     </td>
-    <td></td>
 </tr>
 </table>
 <br />
