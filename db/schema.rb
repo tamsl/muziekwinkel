@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20100121125545) do
   end
 
   create_table "uitgelichts", :force => true do |t|
-    t.integer  "album_id_id"
+    t.integer  "album_id"
     t.text     "omschrijving"
     t.datetime "created_at"
     t.datetime "updated_at"

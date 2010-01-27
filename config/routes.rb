@@ -16,10 +16,11 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect 'disclaimer/',   :controller => "home",   :action => "disclaimer"
   map.connect 'search/',       :controller => "home",   :action => "search"
+  map.connect 'genre/:genre',  :controller => "home",   :action => "genre"
   map.connect 'albums/nieuwe', :controller => "albums", :action => "nieuwe"
   map.connect 'albums/bestverkocht', :controller => "albums", :action => "bestverkocht" 
-  map.connect 'genre/:genre', :controller => "home", :action => "genre"
-  map.connect 'albums/bestrating', :controller => "albums", :action => "bestrating" 
+  map.connect 'albums/bestrating',   :controller => "albums", :action => "bestrating" 
+  map.connect 'albums/uitgelicht',   :controller => "albums", :action => "uitgelicht"
 
   map.resources :medewerkers
   map.resources :nummers

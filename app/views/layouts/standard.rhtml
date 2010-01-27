@@ -74,7 +74,7 @@
         if(self.location==top.location)self.location="frameset.html";
     </script>
   </head>
-  <body>
+  <body style="overflow-x: auto; overflow-y: scroll;">
     <div class="container"> 
       <div class="header"> </div>
       <div class="menu">
@@ -105,53 +105,9 @@
 
           <p class="right_head">Uitgelichte albums <img src="images/downarrow.png" border="0px" hspace="2px" align="right"/></p>
           <div class="right_body">
-            <table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px">
-              <tr>
-                <td rowspan="5" style="background-color:#ffffff; width:100px"><img src="cover.jpg" width="100" height="100" alt="cover" /></td>
-                <td style="width:35px">artiest:</td>
-                <td style="width:199px">Monolake</td>
-              </tr>
-              <tr>
-                <td>album:</td>
-                <td>Hong Kong</td>
-              </tr>
-              <tr>
-                <td>genre:</td>
-                <td>Ambient</td>
-              </tr>
-              <tr>
-                <td>prijs:</td>
-                <td>12,- euro</td>
-              </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td><div class="koopknop"> kopen</div> </td>
-              </tr>
-            </table>
-            <br />
-            <table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:360px">
-              <tr>
-                <td rowspan="5" style="background-color:#ffffff; width:100px"><img src="front.jpg" width="100" height="100" alt="cover" /></td>
-                <td style="width:35px">artiest:</td>
-                <td style="width:199px">Systems Officer</td>
-              </tr>
-              <tr>
-                <td>album:</td>
-                <td>Underslept</td>
-              </tr>
-              <tr>
-                <td>genre:</td>
-                <td>Rock</td>
-              </tr>
-              <tr>
-                <td>prijs:</td>
-                <td>goedkoop</td>
-              </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td><div class="koopknop"> kopen</div> </td>
-              </tr>
-            </table>
+            <% for uitgelicht in Uitgelicht.all(:limit => 2) %>
+             <% render :partial => 'albums/album', :locals => {:album => uitgelicht.album} %>
+            <% end %>
           </div>
 
           <p class="right_head">Nieuwe albums <img src="images/downarrow.png" border="0px" hspace="2px" align="right"/></p>
