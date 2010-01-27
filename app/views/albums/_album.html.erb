@@ -1,8 +1,8 @@
 <table style="width: 100%" bgcolor="#ffffff">
   <tr>
     <td width="100px" rowspan="6">
-      <%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '100px', :height => '100px',
-          :vspace => '3px', :hspace => '3px', :border => '0px'), :action => 'show', :id => album %>
+      <%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '100px', :height => '100px', :vspace => '3px', :hspace => '3px', :border => '0px'),
+          :controller => 'albums', :action => 'show', :id => album.id %>
     </td>
     <td width="50px">Artiest:</td>
     <td><%=h album.artiest %>&nbsp;</td>
