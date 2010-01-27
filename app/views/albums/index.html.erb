@@ -55,12 +55,12 @@ $('#categoryList').listnav({
     
     <td></td>
     <td><%= link_to 'Show', album %>
-        <% if user_is_medewerker? %>
+        
+    </td>
+    <td><% if user_is_medewerker? %>
           <%= link_to 'Edit', edit_album_path(album) %>
           <%= link_to 'Destroy', album, :confirm => 'Are you sure?', :method => :delete %>
-        <% end %>
-    </td>
-    <td></td>
+        <% end %></td>
 </tr>
 </table>
 <br />
