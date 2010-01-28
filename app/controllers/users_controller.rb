@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @user = Klant.new(params[:user])
     @user.register! if @user.valid?
     if @user.errors.empty?
-      UserMailer.deliver_signup_notification(@user)
+      #UserMailer.deliver_signup_notification(@user)
       #self.current_user = @user
       #redirect_back_or_default('/')
       flash[:notice] = "Thanks for signing up!"

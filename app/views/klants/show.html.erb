@@ -37,6 +37,7 @@
   <%=h @klant.huisnummer %>
 </p>
 
+<p><%= link_to 'Mijn Aankopen', klant_aankoops_path(@klant) %></p>
 
 <%= link_to 'Edit', edit_klant_path(@klant) %> |
 <%= link_to 'Back', klants_path %>

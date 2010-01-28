@@ -31,4 +31,6 @@
 
 <br />
 
-<%= link_to 'New klant', new_klant_path %>
+<% if user_is_medewerker? %>
+  <%= link_to 'New klant', new_klant_path %>
+<% end %>

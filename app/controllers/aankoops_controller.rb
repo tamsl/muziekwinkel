@@ -1,16 +1,9 @@
 class AankoopsController < ApplicationController
-  # GET /aankoops
-  # GET /aankoops.xml
-    layout 'standard'
-
-    before_filter :authorize
+  layout 'standard'
+  before_filter :user_authorize
 
   def index
-    if params[:klant_id]
-      @aankoops = Klant.find(params[:klant_id]).aankoops
-    else
-      @aankoops = Aankoop.find(:all)
-    end
+    @aankoops = Klant.find(params[:klant_id]).aankoops
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,8 +11,6 @@ class AankoopsController < ApplicationController
     end
   end
 
-  # GET /aankoops/1
-  # GET /aankoops/1.xml
   def show
     @aankoop = Aankoop.find(params[:id])
 
@@ -29,8 +20,6 @@ class AankoopsController < ApplicationController
     end
   end
 
-  # GET /aankoops/new
-  # GET /aankoops/new.xml
   def new
     @aankoop = Aankoop.new
 
@@ -40,15 +29,13 @@ class AankoopsController < ApplicationController
     end
   end
 
-  # GET /aankoops/1/edit
   def edit
     @aankoop = Aankoop.find(params[:id])
   end
 
-  # POST /aankoops
-  # POST /aankoops.xml
   def create
     @aankoop = Aankoop.new(params[:aankoop])
+    @aankoop.klant_id = current_user.id
     if @aankoop.prijs.nil?
       @aankoop.prijs = @aankoop.product.prijs
     end
@@ -56,7 +43,7 @@ class AankoopsController < ApplicationController
     respond_to do |format|
       if @aankoop.save
         flash[:notice] = 'Aankoop was successfully created.'
-        format.html { redirect_to(@aankoop) }
+        format.html { redirect_to(@aankoop.klant) }
         format.xml  { render :xml => @aankoop, :status => :created, :location => @aankoop }
       else
         format.html { render :action => "new" }
@@ -89,7 +76,7 @@ class AankoopsController < ApplicationController
     @aankoop.destroy
 
     respond_to do |format|
-      format.html { redirect_to(aankoops_url) }
+      format.html { redirect_to(@aankoop.klant) }
       format.xml  { head :ok }
     end
   end

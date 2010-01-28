@@ -16,13 +16,13 @@
     <td><%=h aankoop.prijs %></td>
     <td><%=h aankoop.datum %></td>
     <td><%=h aankoop.betaald %></td>
-    <td><%= link_to 'Show', aankoop %></td>
-    <td><%= link_to 'Edit', edit_aankoop_path(aankoop) %></td>
-    <td><%= link_to 'Destroy', aankoop, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Show', klant_aankoop_path(aankoop.klant_id, aankoop) %></td>
+    <td><%= link_to 'Edit', edit_klant_aankoop_path(aankoop.klant_id, aankoop) %></td>
+    <td><%= link_to 'Destroy', klant_aankoop_path(aankoop.klant_id, aankoop), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New aankoop', new_aankoop_path %>
+<%= link_to 'New aankoop', new_klant_aankoop_path %>

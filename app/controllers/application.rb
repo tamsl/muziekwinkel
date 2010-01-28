@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     end
 
     def user_authorize
-      unless user_is_medewerker? or current_user.id == params[:id].to_i
+      unless user_is_medewerker? or [params[:id].to_i, params[:klant_id].to_i].include? current_user.id
         redirect_back_or_default('/login')
         false
       end

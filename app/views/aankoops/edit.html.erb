@@ -1,6 +1,6 @@
 <h1>Editing aankoop</h1>
 
-<% form_for(@aankoop) do |f| %>
+<% form_for(:klant, @aankoop) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -24,5 +24,5 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', @aankoop %> |
-<%= link_to 'Back', aankoops_path %>
+<%= link_to 'Show', klant_aankoop_path(@aankoop.klant_id, @aankoop) %> |
+<%= link_to 'Back', klant_aankoops_path %>

@@ -1,6 +1,6 @@
 <h1>New aankoop</h1>
 
-<% form_for(@aankoop) do |f| %>
+<% form_for([:klant, @aankoop]) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -8,20 +8,8 @@
     <%= f.collection_select :product_id, Product.find(:all).sort_by {|item| item.titel}, :id, :titel %>
   </p>
   <p>
-    <%= f.label :klant %><br />
-    <%= f.collection_select :klant_id, Klant.find(:all).sort_by {|item| item.naam_omgekeerd}, :id, :naam_omgekeerd %>
-  </p>
-  <p>
-    <%= f.label :datum %><br />
-    <%= f.datetime_select :datum, :start_year => 2010, :end_year => 2200 %>
-  </p>
-  <p>
-    <%= f.label :betaald %><br />
-    <%= f.check_box :betaald %>
-  </p>
-  <p>
     <%= f.submit "Create" %>
   </p>
 <% end %>
 
-<%= link_to 'Back', aankoops_path %>
+<%= link_to 'Back', klant_aankoops_path %>

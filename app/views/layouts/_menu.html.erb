@@ -49,7 +49,7 @@
     <ul class="nav">
       <li class="nav4 drop"><a class="main down" href="<%= if user_is_medewerker? then medewerker_path current_user else klant_path current_user end %>"><b>User</b></a>
         <ul><li><a href=" "><b>Winkelmandje</b></a></li>
-            <li><a href=" "><b>Aankopen</b></a></li>
+            <li><a href="<%= klant_aankoops_path current_user %>"><b>Aankopen</b></a></li>
             <li><a href=" "><b>Voorkeuren</b></a></li>
             <li><%= link_to '<b>Verander wachtwoord</b>', change_password_path %></li>
             <li><%= link_to '<b>Reset wachtwoord</b>', reset_password_path %></li>
