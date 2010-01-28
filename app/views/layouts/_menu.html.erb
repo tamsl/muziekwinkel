@@ -47,7 +47,7 @@
 
   <div class="searchmenu">
     <ul class="nav">
-      <li class="nav4 drop"><a class="main down" href="/klants"><b>User</b></a>
+      <li class="nav4 drop"><a class="main down" href="<%= if user_is_medewerker? then medewerker_path current_user else klant_path current_user end %>"><b>User</b></a>
         <ul><li><a href=" "><b>Winkelmandje</b></a></li>
             <li><a href=" "><b>Aankopen</b></a></li>
             <li><a href=" "><b>Voorkeuren</b></a></li>
