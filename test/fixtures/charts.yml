@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  product: 
+  genre: MyString
+  nummer: 
+
+two:
+  product: 
+  genre: MyString
+  nummer: 
