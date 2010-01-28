@@ -1,5 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :uitgelichts
 
   map.resources :users, :member => { :suspend => :put, :unsuspend => :put, :purge => :delete }
 
@@ -23,6 +22,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'albums/uitgelicht',   :controller => "albums", :action => "uitgelicht"
 
   map.resources :nummers
+  map.resources :charts
+  map.resources :uitgelichts
 
   map.resources :albums,      :has_many => [:nummers, :commentaars]
   map.resources :klants,      :has_many => :aankoops

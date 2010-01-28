@@ -1,0 +1,18 @@
+<p>
+  <b>Product:</b>
+  <%=h @chart.product %>
+</p>
+
+<p>
+  <b>Genre:</b>
+  <%=h @chart.genre %>
+</p>
+
+<p>
+  <b>Nummer:</b>
+  <%=h @chart.nummer %>
+</p>
+
+
+<%= link_to 'Edit', edit_chart_path(@chart) %> |
+<%= link_to 'Back', charts_path %>
