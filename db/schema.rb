@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100121125545) do
+ActiveRecord::Schema.define(:version => 20100128141052) do
 
   create_table "aankoops", :force => true do |t|
     t.integer  "product_id"
@@ -17,6 +17,14 @@ ActiveRecord::Schema.define(:version => 20100121125545) do
     t.float    "prijs"
     t.datetime "datum"
     t.boolean  "betaald"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "charts", :force => true do |t|
+    t.integer  "product_id"
+    t.string   "genre"
+    t.integer  "nummer"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
