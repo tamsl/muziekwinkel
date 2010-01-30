@@ -5,7 +5,7 @@
 
   <p>
     <%= f.label :product %><br />
-    <%= f.text_field :product %>
+    <%= f.collection_select :product_id, Nummer.all, :id, :titel %>
   </p>
   <p>
     <%= f.label :genre %><br />

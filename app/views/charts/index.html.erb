@@ -1,23 +1,24 @@
 <h1>Listing charts</h1>
 
-<table>
-  <tr>
-    <th>Product</th>
-    <th>Genre</th>
-    <th>Nummer</th>
-  </tr>
 
-<% for chart in @charts %>
-  <tr>
-    <td><%=h chart.product %></td>
-    <td><%=h chart.genre %></td>
-    <td><%=h chart.nummer %></td>
-    <td><%= link_to 'Show', chart %></td>
-    <td><%= link_to 'Edit', edit_chart_path(chart) %></td>
-    <td><%= link_to 'Destroy', chart, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% for genre, nummers in @charts %>
+  <%= genre %>
+  <table>
+    <tr>
+      <th>Nummer</th>
+      <th>Titel</th>
+    </tr>
+  <% for nummer in nummers %>
+    <tr>
+      <td><%=h nummer.nummer %></td>
+      <td><%=h nummer.product.titel %></td>
+      <td><%= link_to 'Edit', edit_chart_path(nummer) %>
+          <%= link_to 'Destroy', nummer, :confirm => 'Are you sure?', :method => :delete %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
 <% end %>
-</table>
 
 <br />
 <%= link_to 'New chart', new_chart_path %>
