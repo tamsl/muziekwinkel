@@ -27,7 +27,13 @@
   </tr>
   <tr style="height:20px">
     <td bgcolor="#ffffff"><strong>Prijs:</strong></td>
-    <td bgcolor="#ffffff"><span style="float:left; padding-top:2px;">&euro;<%=h @album.prijs %></span> <div style="right:1px; clear:none; float: right; width: 82px" ><div class="playknop"></div><div class="numkoopknop"></div></div></td>
+    <td bgcolor="#ffffff"><span style="float:left; padding-top:2px;">&euro;<%=h @album.prijs %></span>
+    <div style="right:1px; clear:none; float: right; width: 82px" >
+        <% form_tag('/winkelwagen', :method => "POST") do %>
+          <input type="hidden" name="id" value="<%= album.id %>"/>
+          <button type="submit" style="border: 0px; padding: 0px; margin: 0px;"><div class="numkoopknop"></div></button>
+        <% end %>
+    </div></td>
   </tr>
 
     <tr>

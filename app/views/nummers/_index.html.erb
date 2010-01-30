@@ -2,9 +2,18 @@
 
 <% for nummer in @album.nummers.sort_by { |n| n.tracknr } %>
   <tr>
-    <td><%= h nummer.tracknr %>.</td><td><%= h nummer.artiest %>&nbsp;-&nbsp;<%= h nummer.titel %>&nbsp;</td>
-	    <td align="right" ><%= h nummer.lengte %> </td>
-<td width="81px"align="right"><a href="javascript:parent.mp3playa.play('hot.mp3', '<%= h escape_javascript nummer.artiest %>', '<%= h escape_javascript nummer.titel %>')"><div class="playknop"></div></a><div class="numkoopknop"></div></td>
+    <td><%= h nummer.tracknr %>.</td>
+    <td><%= h nummer.artiest %>&nbsp;-&nbsp;<%= h nummer.titel %>&nbsp;</td>
+    <td align="right" ><%= h nummer.lengte %> </td>
+    <td width="81px"align="right">
+      <a href="javascript:parent.mp3playa.play('hot.mp3', '<%= h escape_javascript nummer.artiest %>', '<%= h escape_javascript nummer.titel %>')">
+        <div class="playknop"></div>
+      </a>
+      <% form_tag('/winkelwagen', :method => "POST") do %>
+        <input type="hidden" name="id" value="<%= nummer.id %>"/>
+        <button type="submit" style="border: 0px; padding: 0px; margin: 0px;"><div class="numkoopknop"></div></button>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 

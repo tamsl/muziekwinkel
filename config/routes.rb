@@ -24,6 +24,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :nummers
   map.resources :charts
   map.resources :uitgelichts
+  map.resources :winkelwagen, :only => [:index, :create, :destroy]
 
   map.resources :albums,      :has_many => [:nummers, :commentaars]
   map.resources :klants,      :has_many => :aankoops

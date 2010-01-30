@@ -1,0 +1,7 @@
+<h1>Winkelmandje</h1>
+
+<ul>
+<% for product in @products %>
+  <li> <%= h product.type %> <%=h product.titel %> <%= h product.artiest %> <%= link_to 'Remove', winkelwagen_path(product.id), :method => :delete %></li>
+<% end %>
+</ul>

@@ -28,7 +28,12 @@
     <td><%=album.nummers.count(:tracknr)%></td>
   </tr>
     <tr>
-    <td><div class="playknop" style="margin-left:4px; margin-bottom:2px"></div><div class="numkoopknop"></div></td>
+    <td><div class="playknop" style="margin-left:4px; margin-bottom:2px"></div>
+        <% form_tag('/winkelwagen', :method => "POST") do %>
+          <input type="hidden" name="id" value="<%= album.id %>"/>
+          <button type="submit" style="border: 0px; padding: 0px; margin: 0px;"><div class="numkoopknop"></div></button>
+        <% end %>
+    </td>
     <td>Prijs:</td>
     <td>&euro;<%=h album.prijs %></td>
   </tr>

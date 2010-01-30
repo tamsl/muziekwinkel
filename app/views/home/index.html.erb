@@ -1,71 +1,71 @@
 <div style="background-color:#ccc; width:559px; padding:10px">
-<table width="559px" border="0" align="center" cellpadding="2" bgcolor="#cccccc" >
-<tr><td background="#ffffff" height="50px" valign="top">
-	<div id="pagelogin" style="margin-top:-12px; margin-bottom:10px; margin-right:-10px; float:right;">
-</div>
-<br />
-<div style="background-color:#fff; width:518px; height:200px; border:solid 2px #000; float:left; margin-left:10px; margin-bottom:20px; padding:5px; ">
-<h2>Welkom</h2>
-<br />
-Welkom bij de beste muziekwinkel ter wereld.<br />
-Hier is de allerchillste muziek direct te downloaden.<br />
-Ook kunt u een account aanmaken en aanbevelingen ontvangen gebaseerd op uw persoonlijke muziek voorkeuren.
-<br /><br />
-Dus wacht niet langer en ervaar de onge&euml;venaarde vetheid van YourMusicStore.nl.
-</div>
-<div style="background-color:#000; width:240px; border:solid 2px #000; float:left; margin-left:10px; padding:1px;">
-<font color="#ffffff">best verkocht:</font>
-<hr style="padding:0px; margin:0;"/>
-<% for album in Album.all.sort_by { |a| a.aankoops.count }.reverse[0..4] %>
-<table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:240px; height:90px">
-  <tr>
-    <td rowspan="4" valign="top" style="background-color:#ffffff; width:50px"><%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '50px', :height => '50px', :border => '0px'), :controller => 'Albums', :action => 'show', :id => album %></td>
-    <td style="width:199px"><%=h album.artiest %></td>
-  </tr>
-  <tr>
+  <table width="559px" border="0" align="center" cellpadding="2" bgcolor="#cccccc" >
+    <tr>
+      <td background="#ffffff" height="50px" valign="top">
+        <div id="pagelogin" style="margin-top:-12px; margin-bottom:10px; margin-right:-10px; float:right;"></div>
+        <br />
+      <div style="background-color:#fff; width:518px; height:200px; border:solid 2px #000; float:left; margin-left:10px; margin-bottom:20px; padding:5px; ">
+        <h2>Welkom</h2>
+        <br />
+        Welkom bij de beste muziekwinkel ter wereld.<br />
+        Hier is de allerchillste muziek direct te downloaden.<br />
+        Ook kunt u een account aanmaken en aanbevelingen ontvangen gebaseerd op uw persoonlijke muziek voorkeuren.
+        <br /><br />
+        Dus wacht niet langer en ervaar de onge&euml;venaarde vetheid van YourMusicStore.nl.
+      </div>
+      <div style="background-color:#000; width:240px; border:solid 2px #000; float:left; margin-left:10px; padding:1px;">
+        <font color="#ffffff">best verkocht:</font>
+        <hr style="padding:0px; margin:0;"/>
+        <% for album in Album.all.sort_by { |a| a.aankoops.count }.reverse[0..4] %>
+          <table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:240px; height:90px">
+            <tr>
+              <td rowspan="4" valign="top" style="background-color:#ffffff; width:50px">
+                <%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '50px', :height => '50px', :border => '0px'), :controller => 'Albums', :action => 'show', :id => album %>
+              </td>
+              <td style="width:199px"><%=h album.artiest %></td>
+            </tr>
+            <tr><td><%=h album.titel %></td></tr>
+            <tr><td><%=h album.genre %></td></tr>
+            <tr>
+              <td>&euro; <%=h album.prijs %>
+                <% form_tag('/winkelwagen', :method => "POST") do %>
+                  <input type="hidden" name="id" value="<%= album.id %>"/>
+                  <button type="submit" style="border: 0px; padding: 0px; margin: 0px; float: right"><div class="numkoopknop"></div></button>
+                <% end %>
+              </td>
+            </tr>
+          </table>
 
-    <td><%=h album.titel %></td>
-  </tr>
-  <tr>
+          <hr style="padding:0px; margin:0;"/>
+        <% end %>
+        <a href="/albums/bestverkocht"><b><font color="#ffffff">meer >></font></b></a>
+      </div>
 
-    <td><%=h album.genre %></td>
+     <div style="background-color:#000; width:240px; border:solid 2px #000; float:right; margin-right:10px; padding:1px;">
+       <font color="#ffffff">hoogst gewaardeerd:</font>
+       <hr style="padding:0px; margin:0;"/>
+       <% for album in Album.all(:order => 'jaar DESC', :limit => 5) %>
+         <table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:240px; height:90px">
+           <tr>
+             <td rowspan="4" valign="top" style="background-color:#ffffff; width:50px">
+               <%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '50px', :height => '50px', :border => '0px'), :controller => 'Albums', :action => 'show', :id => album %>
+             </td>
+             <td style="width:199px"><%=h album.artiest %></td>
+           </tr>
+           <tr><td><%=h album.titel %></td></tr>
+           <tr><td><%=h album.genre %></td></tr>
+           <tr><td>&euro; <%=h album.prijs %>
+               <% form_tag('/winkelwagen', :method => "POST") do %>
+                 <input type="hidden" name="id" value="<%= album.id %>"/>
+                 <button type="submit" style="border: 0px; padding: 0px; margin: 0px; float: right"><div class="numkoopknop"></div></button>
+               <% end %></td>
+           </tr>
+         </table>
+         <hr style="padding:0px; margin:0;"/>
+       <% end %>
+       <a href="/albums/nieuwe"><b><font color="#ffffff">meer >></font></b></a>
+     </div>
+   </td>
   </tr>
-  <tr>
-
-    <td>&euro; <%=h album.prijs %> <div class="numkoopknop" style="float:right"></div></td>
-  </tr>
-</table>
-<hr style="padding:0px; margin:0;"/>
-<% end %>
-<a href="/albums/bestverkocht"><b><font color="#ffffff">meer >></font></b></a>
-</div>
-
-<div style="background-color:#000; width:240px; border:solid 2px #000; float:right; margin-right:10px; padding:1px;">
-<font color="#ffffff">hoogst gewaardeerd:</font>
-<hr style="padding:0px; margin:0;"/>
-<% for album in Album.all(:order => 'jaar DESC', :limit => 5) %>
-<table border="0" cellspacing="0" cellpadding="3" style="background-color:#ffffff; width:240px; height:90px">
-  <tr>
-    <td rowspan="4" valign="top" style="background-color:#ffffff; width:50px"><%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '50px', :height => '50px', :border => '0px'), :controller => 'Albums', :action => 'show', :id => album %></td>
-    <td style="width:199px"><%=h album.artiest %></td>
-  </tr>
-  <tr>
-
-    <td><%=h album.titel %></td>
-  </tr>
-  <tr>
-
-    <td><%=h album.genre %></td>
-  </tr>
-  <tr>
-
-    <td>&euro; <%=h album.prijs %> <div class="numkoopknop" style="float:right"></div></td>
-  </tr>
-</table>
-<hr style="padding:0px; margin:0;"/>
-<% end %>
-<a href="/albums/nieuwe"><b><font color="#ffffff">meer >></font></b></a>
-</div>
-</td></tr>
 </table>
 </div>
