@@ -17,8 +17,10 @@
     <td><%=h aankoop.datum %></td>
     <td><%=h aankoop.betaald %></td>
     <td><%= link_to 'Show', klant_aankoop_path(aankoop.klant_id, aankoop) %></td>
-    <td><%= link_to 'Edit', edit_klant_aankoop_path(aankoop.klant_id, aankoop) %></td>
-    <td><%= link_to 'Destroy', klant_aankoop_path(aankoop.klant_id, aankoop), :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if user_is_medewerker? %>
+      <td><%= link_to 'Edit', edit_klant_aankoop_path(aankoop.klant_id, aankoop) %></td>
+      <td><%= link_to 'Destroy', klant_aankoop_path(aankoop.klant_id, aankoop), :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
