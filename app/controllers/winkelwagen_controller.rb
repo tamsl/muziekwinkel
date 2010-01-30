@@ -24,7 +24,7 @@ class WinkelwagenController < ApplicationController
   end
 
   def destroy
-    session[:products].delete(params[:id])
+    session[:products].delete(params[:id].to_i)
     redirect_to :back
   end
 
