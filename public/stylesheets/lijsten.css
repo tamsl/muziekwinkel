@@ -20,7 +20,7 @@
 .right_head {
     cursor:                 pointer;
     position:               inherit;
-    background-color:       #111111;
+    background-color:       #000000;
     margin:                 0px;
     font-family:            Verdana, Geneva, sans-serif;
     font-size:              12px;
@@ -43,7 +43,7 @@
 .rightsearch_head {
     cursor:                 pointer;
     position:               inherit;
-    background-color:       #111111;
+    background-color:       #000000;
     margin:                 0px;
     font-family:            Verdana, Geneva, sans-serif;
     font-size:              12px;

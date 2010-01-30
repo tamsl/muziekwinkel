@@ -1,22 +1,58 @@
-<h1>Listing uitgelichts</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
-<table>
-  <tr>
-    <th>Album</th>
-    <th>Omschrijving</th>
-  </tr>
+<html>
+    <head>
+        <meta name="generator" content="HTML Tidy, see www.w3.org">
 
-<% for uitgelicht in @uitgelichts %>
-  <tr>
-    <td><%=h uitgelicht.album_id %></td>
-    <td><%=h uitgelicht.omschrijving %></td>
-    <td><%= link_to 'Show', uitgelicht %></td>
-    <td><%= link_to 'Edit', edit_uitgelicht_path(uitgelicht) %></td>
-    <td><%= link_to 'Destroy', uitgelicht, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+        <title></title>
+    </head>
 
-<br />
+    <body>
 
-<%= link_to 'New uitgelicht', new_uitgelicht_path %>
+
+        <div style=
+        "background-color:#ccc; width:559px; padding:10px">
+            <% for uitgelicht in @uitgelichts %>
+
+            <table width="559px" border="0" align="center"
+            cellpadding="2">
+                <tr>
+                    <td bgcolor="#ffffff">
+                    <strong>Album:</strong></td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#ffffff">
+                    <%= render :partial => 'albums/album', :locals => {:album => uitgelicht.album} %></td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#ffffff">
+                    <strong>Omschrijving:</strong></td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#ffffff">
+                    <%=h uitgelicht.omschrijving %></td>
+                </tr>
+                <% if user_is_medewerker? %>
+
+                <tr>
+                    <td><%= link_to 'Show', uitgelicht %></td>
+
+                    <td>
+                    <%= link_to 'Edit', edit_uitgelicht_path(uitgelicht) %></td>
+
+                    <td>
+                    <%= link_to 'Destroy', uitgelicht, :confirm => 'Are you sure?', :method => :delete %></td>
+                </tr>
+                <% end %>
+            </table>
+            <% end %><br>
+             <% if user_is_medewerker? %>
+            <%= link_to 'New Uitgelicht', new_uitgelicht_path %>
+            <% end %>
+        </div>
+    </body>
+</html>
+
