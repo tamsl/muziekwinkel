@@ -139,9 +139,10 @@ $(function() { play('None', 'None', 'None')});
 <ul class="nav">
 <li class="nav4 drop"><a class="main down" href="/klants"><b>User</b></a>
             <ul>
-                <li><a href=" "><b>Winkelmandje</b></a></li>
-                <li><a href=" "><b>Aankopen</b></a></li>
-                <li><a href=" "><b>Voorkeuren</b></a></li>
+                <li><a href=" "><b>Winkelwagen</b></a></li>
+                <li><a href="<%= klant_aankoops_path current_user %>"><b>Aankopen</b></a></li>
+                <li><a href=" "><b>Aanbevelingen</b></a></li>
+		<li><%= link_to '<b>Log uit</b>', logout_path %></li>
             </ul>
         </li>
     </ul>
