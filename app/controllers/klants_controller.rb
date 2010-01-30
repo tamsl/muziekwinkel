@@ -1,7 +1,7 @@
 class KlantsController < ApplicationController
   # GET /klants
   # GET /klants.xml
-    layout 'standardklants'
+    layout 'standard'
     
     before_filter :authorize, :only => [:index]
     before_filter :user_authorize, :only => [:show, :edit]
