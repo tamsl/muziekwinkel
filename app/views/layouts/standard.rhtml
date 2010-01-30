@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <base href="http://localhost:3000" />
@@ -65,16 +64,16 @@
         $(function() { play('None', 'None', 'None')});
     </script>
     <script language="javascript">
-        if(self.location==top.location)self.location="frameset.html";
+       if(self.location==top.location)self.location="frameset.html";
     </script>
   </head>
+
   <body style="overflow-x: auto; overflow-y: scroll;">
     <div class="container"> 
       <div class="header"> </div>
       <div class="menu">
         <%= render :partial => 'layouts/menu' %>
       </div>
-
       <div class="inhoud"> <!-- alles onder het menu-->
         <div class="inhoud_text_links"> <!-- hier komen de views-->
           <%= yield -%>
@@ -117,13 +116,10 @@
               <%= render :partial => 'albums/album', :locals => {:album => album} %>
             <% end %>
           </div>
-
           <div id="footer"></div>
           <div class="bottommp3spacer"></div>
         </div>
-
         <div class="bgwhite"></div>
-
       </div>
     </div>
   </body>

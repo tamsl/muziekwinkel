@@ -4,7 +4,7 @@
     <li class="nav3 drop"><a class="main" href="/artiests"><b>Artiesten</b></a></li>
     <li class="nav3 drop"><a class="main down" href="/albums"><b>Albums</b></a>
       <ul><li><a href="/albums/nieuwe"><b>Nieuwe albums</b></a></li>
-          <li><a href="/albums/uitgelicht"><b>Uitgelicht</b></a></li>
+          <li><a href="/uitgelichts"><b>Uitgelicht</b></a></li>
           <li><a href="/albums/bestverkocht"><b>Best verkocht</b></a></li>
           <li><a href="/albums/bestrating"><b>Hoogst gewaardeerd</b></a></li>
       </ul>
@@ -47,7 +47,7 @@
 
   <div class="searchmenu">
     <ul class="nav">
-      <li class="nav4 drop"><a class="main down" href="<%= if user_is_medewerker? then medewerker_path current_user else klant_path current_user end %>"><b>User</b></a>
+      <li class="nav4 drop"><a class="main down" href="<%= if user_is_medewerker? then medewerker_path current_user else klant_path current_user end %>"><b>Gebruiker</b></a>
         <ul><li><a href=" "><b>Winkelmandje</b></a></li>
             <li><a href="<%= klant_aankoops_path current_user %>"><b>Aankopen</b></a></li>
             <li><a href=" "><b>Voorkeuren</b></a></li>

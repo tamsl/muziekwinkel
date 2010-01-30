@@ -1,9 +1,10 @@
 class ChartsController < ApplicationController
   # GET /charts
   # GET /charts.xml
+    layout 'standard'
+
   def index
     @charts = Chart.find(:all)
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @charts }

@@ -3,7 +3,7 @@ class CreateCharts < ActiveRecord::Migration
     create_table :charts do |t|
       t.references :product
       t.string :genre
-      t.int :nummer
+      t.integer :nummer
 
       t.timestamps
     end
