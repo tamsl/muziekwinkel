@@ -1,7 +1,20 @@
 <h1>Winkelmandje</h1>
 
-<ul>
+<table>
+  <tr>
+    <th>Album/Nummer</th>
+    <th>Titel</th>
+    <th>Artiest</th>
+    <th>Prijs</th>
+  </tr>
+
 <% for product in @products %>
-  <li> <%= h product.type %> <%=h product.titel %> <%= h product.artiest %> <%= link_to 'Remove', winkelwagen_path(product.id), :method => :delete %></li>
+  <tr>
+    <td><%=h product.type %></td>
+    <td><%=h product.titel %></td>
+    <td><%=h product.artiest %></td>
+    <td><%=h product.prijs %></td>
+    <td><%= link_to 'Remove', winkelwagen_path(product.id), :method => :delete %></td>
+  </tr>
 <% end %>
-</ul>
+</table>
