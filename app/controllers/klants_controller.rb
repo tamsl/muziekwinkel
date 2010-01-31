@@ -57,6 +57,23 @@ class KlantsController < ApplicationController
     end
   end
 
+  # PUT /medewerkers/1
+  # PUT /medewerkers/1.xml
+  def update
+    @klant = Klant.find(params[:id])
+
+    respond_to do |format|
+      if @klant.update_attributes(params[:klant])
+        flash[:notice] = 'Klant was successfully updated.'
+        format.html { redirect_to(@klant) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @klant.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
   def activate
     self.current_user = params[:activation_code].blank? ? false : user.find_by_activation_code(params[:activation_code])
     if logged_in? && !current_user.active?
