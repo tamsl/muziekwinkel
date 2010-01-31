@@ -13,10 +13,12 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :session
 
-  map.connect 'disclaimer/',   :controller => "home",   :action => "disclaimer"
-  map.connect 'search/',       :controller => "home",   :action => "search"
-  map.connect 'genre/:genre',  :controller => "home",   :action => "genre"
-  map.connect 'albums/nieuwe', :controller => "albums", :action => "nieuwe"
+  map.connect 'disclaimer/',  :controller => "home", :action => "disclaimer"
+  map.connect 'search/',      :controller => "home", :action => "search"
+  map.connect 'genre/:genre', :controller => "home", :action => "genre"
+  map.connect 'aanbevelingen',:controller => "home", :action => "aanbevelingen"
+
+  map.connect 'albums/nieuwe',       :controller => "albums", :action => "nieuwe"
   map.connect 'albums/bestverkocht', :controller => "albums", :action => "bestverkocht" 
   map.connect 'albums/bestrating',   :controller => "albums", :action => "bestrating" 
   map.connect 'albums/uitgelicht',   :controller => "albums", :action => "uitgelicht"
@@ -24,7 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :nummers
   map.resources :charts
   map.resources :uitgelichts
-  map.resources :winkelwagen, :only => [:index, :create, :destroy]
+  map.resources :winkelwagen, :only => [:index, :create, :destroy], :member => {:checkout => :post}
 
   map.resources :albums,      :has_many => [:nummers, :commentaars]
   map.resources :klants,      :has_many => :aankoops

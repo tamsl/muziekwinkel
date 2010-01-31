@@ -1,16 +1,21 @@
 <p>
-  <b>Product:</b>
+  <b>Album/Nummer:</b>
+  <%=h @aankoop.product.type %>
+</p>
+
+<p>
+  <b>Titel:</b>
   <%=h @aankoop.product.titel %>
 </p>
 
 <p>
-  <b>Klant:</b>
-  <%=h @aankoop.klant.naam_omgekeerd %>
+  <b>Artiest:</b>
+  <%=h @aankoop.product.artiest %>
 </p>
 
 <p>
   <b>Prijs:</b>
-  <%=h @aankoop.prijs  %>
+  <%=h @aankoop.product.prijs  %>
 </p>
 
 <p>
@@ -23,6 +28,7 @@
   <%=h @aankoop.betaald %>
 </p>
 
-
-<%= link_to 'Edit', edit_klant_aankoop_path(@aankoop.klant_id, @aankoop) %> |
+<% if user_is_medewerker? %>
+  <%= link_to 'Edit', edit_klant_aankoop_path(@aankoop.klant_id, @aankoop) %> |
+<% end %>
 <%= link_to 'Back', klant_aankoops_path %>

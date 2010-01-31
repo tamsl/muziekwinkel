@@ -1,7 +1,47 @@
-<h1>Winkelmandje</h1>
+<h1>Winkelwagen</h1>
 
-<ul>
+<table>
+  <tr>
+    <th>Album/Nummer</th>
+    <th>Titel</th>
+    <th>Artiest</th>
+    <th>Prijs</th>
+  </tr>
+
 <% for product in @products %>
-  <li> <%= h product.type %> <%=h product.titel %> <%= h product.artiest %> <%= link_to 'Remove', winkelwagen_path(product.id), :method => :delete %></li>
+  <tr>
+    <td><%=h product.type %></td>
+    <td><%=h product.titel %></td>
+    <td><%=h product.artiest %></td>
+    <td><%=h product.prijs %></td>
+    <td><%= link_to 'Remove', winkelwagen_path(product.id), :method => :delete %></td>
+  </tr>
 <% end %>
-</ul>
+</table>
+
+<br>
+<b>Totale prijs:</b> <%= @products.inject(0) { |sum, product| sum + product.prijs.to_f } %>
+
+<br/><br/>
+<table>
+<% form_tag('/winkelwagen/checkout', :method => :post) do %>
+  <% if user_logged_in? %>
+    U bent ingelogd. Koop deze producten via uw account:
+    <tr>
+      <td><label for="creditcard"/>Creditcard:</label></td>
+      <td><input type="text" readonly="readonly" name="creditcard" id="creditcard" value="<%= current_user.creditcard %>"/></td>
+    </tr>
+    <tr>
+      <td><label for="email"/>E-mail:</label></td>
+      <td><input type="text" readonly="readonly" name="email" id="email" value="<%= current_user.email %>" /></td>
+    </tr>
+  <% else %>
+    U bent niet ingelogd. Vul hier uw creditcard nummer en e-mail in:
+    <label for="creditcard"/>Creditcard:</label> <input type="text" id="creditcard" />
+    <label for="email"/>E-mail:</label> <input type="text" id="creditcard" />
+  <% end %>
+  <tr>
+    <td></td>
+    <td><input type="submit" name="Koop" value="Koop" style="float: right" /></td>
+<% end %>
+</table>

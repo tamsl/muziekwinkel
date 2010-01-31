@@ -35,4 +35,16 @@ class HomeController < ApplicationController
       format.html
     end
   end
+
+  def aanbevelingen
+    genres = current_user.products.count(:group => :genre)
+    @albums = []
+    while @albums.length < 10 and not genres.empty?
+      most_bought = genres.pop[0]
+      albums = Album.all(:conditions => {:genre => most_bought}, :limit => 10)
+      @albums += albums.reject { |a| current_user.products.include? a }
+    end
+    @albums = @albums[0..9]
+  end
+
 end

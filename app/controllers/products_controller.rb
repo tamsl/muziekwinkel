@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   # GET /products
   # GET /products.xml
-    layout 'standardproducts'
+    layout 'standard'
     
     before_filter :authorize, :except => [:index, :show]
     

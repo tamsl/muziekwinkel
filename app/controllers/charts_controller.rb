@@ -3,8 +3,6 @@ class ChartsController < ApplicationController
 
   # GET /charts
   # GET /charts.xml
-    layout 'standard'
-
   def index
     @charts = Chart.find(:all, :order => 'genre, nummer').group_by { |i| i.genre }
     respond_to do |format|

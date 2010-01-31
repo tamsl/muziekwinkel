@@ -48,11 +48,9 @@
   <div class="searchmenu">
     <ul class="nav">
       <li class="nav4 drop"><a class="main down" href="<%= if user_is_medewerker? then medewerker_path current_user else klant_path current_user end %>"><b>Gebruiker</b></a>
-        <ul><li><a href="/winkelwagen"><b>Winkelmandje</b></a></li>
-            <li><a href="<%= klant_aankoops_path current_user %>"><b>Aankopen</b></a></li>
-            <li><a href=" "><b>Voorkeuren</b></a></li>
-            <li><%= link_to '<b>Verander wachtwoord</b>', change_password_path %></li>
-            <li><%= link_to '<b>Reset wachtwoord</b>', reset_password_path %></li>
+        <ul><li><a href="/winkelwagen"><b>Winkelwagen</b></a></li>
+            <li><a href="<%= if user_is_medewerker? then medewerker_aankoops_path current_user else klant_aankoops_path current_user end %>"><b>Aankopen</b></a></li>
+            <li><a href="/aanbevelingen"><b>Aanbevelingen</b></a></li>
             <li><%= link_to '<b>Log uit</b>', logout_path %></li>
         </ul>
       </li>
