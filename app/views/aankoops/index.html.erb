@@ -1,9 +1,10 @@
-<h1>Listing aankoops</h1>
+<h1>Aankopen</h1>
 
 <table>
   <tr>
-    <th>Product</th>
-    <th>Klant</th>
+    <th>Album/Nummer</th>
+    <th>Titel</th>
+    <th>Artiest</th>
     <th>Prijs</th>
     <th>Datum</th>
     <th>Betaald</th>
@@ -11,9 +12,10 @@
 
 <% for aankoop in @aankoops %>
   <tr>
+    <td><%=h aankoop.product.type %></td>
     <td><%=h aankoop.product.titel %></td>
-    <td><%=h aankoop.klant.naam_omgekeerd %></td>
-    <td><%=h aankoop.prijs %></td>
+    <td><%=h aankoop.product.artiest %></td>
+    <td><%=h aankoop.product.prijs %></td>
     <td><%=h aankoop.datum %></td>
     <td><%=h aankoop.betaald %></td>
     <td><%= link_to 'Show', klant_aankoop_path(aankoop.klant_id, aankoop) %></td>
@@ -24,7 +26,11 @@
   </tr>
 <% end %>
 </table>
+<br>
+<b>Totale prijs:</b> <%= @aankoops.inject(0) { |sum, aankoop| sum + aankoop.product.prijs.to_f } %>
 
 <br />
 
 <%= link_to 'New aankoop', new_klant_aankoop_path %>
+
+

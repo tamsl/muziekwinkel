@@ -19,7 +19,8 @@
 <% end %>
 </table>
 
-totaal: <%= @products.inject(0) { |sum, product| sum + product.prijs.to_f } %>
+<br>
+<b>Totale prijs:</b> <%= @products.inject(0) { |sum, product| sum + product.prijs.to_f } %>
 
 <br/><br/>
 <table>
