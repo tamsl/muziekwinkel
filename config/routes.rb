@@ -13,10 +13,12 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :session
 
-  map.connect 'disclaimer/',   :controller => "home",   :action => "disclaimer"
-  map.connect 'search/',       :controller => "home",   :action => "search"
-  map.connect 'genre/:genre',  :controller => "home",   :action => "genre"
-  map.connect 'albums/nieuwe', :controller => "albums", :action => "nieuwe"
+  map.connect 'disclaimer/',  :controller => "home", :action => "disclaimer"
+  map.connect 'search/',      :controller => "home", :action => "search"
+  map.connect 'genre/:genre', :controller => "home", :action => "genre"
+  map.connect 'aanbevelingen',:controller => "home", :action => "aanbevelingen"
+
+  map.connect 'albums/nieuwe',       :controller => "albums", :action => "nieuwe"
   map.connect 'albums/bestverkocht', :controller => "albums", :action => "bestverkocht" 
   map.connect 'albums/bestrating',   :controller => "albums", :action => "bestrating" 
   map.connect 'albums/uitgelicht',   :controller => "albums", :action => "uitgelicht"
