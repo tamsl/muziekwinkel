@@ -14,6 +14,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
 
   map.connect 'disclaimer/',  :controller => "home", :action => "disclaimer"
+  map.connect 'genreoverzicht/',  :controller => "home", :action => "genreoverzicht"
   map.connect 'search/',      :controller => "home", :action => "search"
   map.connect 'genre/:genre', :controller => "home", :action => "genre"
   map.connect 'aanbevelingen',:controller => "home", :action => "aanbevelingen"
