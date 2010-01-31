@@ -41,6 +41,7 @@ class WinkelwagenController < ApplicationController
         aankoop = Aankoop.new
         aankoop.klant = current_user
         aankoop.product = product
+	aankoop.datum = Time.now
         aankoop.betaald = true
         aankoop.save
     end
