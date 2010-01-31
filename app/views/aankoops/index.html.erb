@@ -1,22 +1,26 @@
-<h1>Aankopen</h1>
-
+<div style="padding:5px; height:14px; color:#FFFFFF; background-color:#000000; width:569px;">
+            Aankopen
+        </div>
+<div style="background-color:#ccc; width:559px; padding:10px">
+<div style="background-color:#ffffff; margin-bottom:10px">
 <table>
   <tr>
-    <th>Album/Nummer</th>
-    <th>Titel</th>
-    <th>Artiest</th>
-    <th>Prijs</th>
-    <th>Datum</th>
-    <th>Betaald</th>
+    <td><strong>Type</strong></td>
+    <td><strong>Titel</strong></td>
+    <td><strong>Artiest</strong></td>
+    <td><strong>Prijs</strong></td>
+    <td><strong>Datum</strong></td>
+    <td><strong>Betaald</strong></td>
   </tr>
 
 <% for aankoop in @aankoops %>
+
   <tr>
     <td><%=h aankoop.product.type %></td>
     <td><%=h aankoop.product.titel %></td>
     <td><%=h aankoop.product.artiest %></td>
     <td><%=h aankoop.product.prijs %></td>
-    <td><%=h aankoop.datum %></td>
+    <td><%=h aankoop.datum.to_s(:long) %></td>
     <td><%=h aankoop.betaald %></td>
     <td><%= link_to 'Show', klant_aankoop_path(aankoop.klant_id, aankoop) %></td>
     <% if user_is_medewerker? %>
@@ -24,12 +28,14 @@
       <td><%= link_to 'Destroy', klant_aankoop_path(aankoop.klant_id, aankoop), :confirm => 'Are you sure?', :method => :delete %></td>
     <% end %>
   </tr>
+
 <% end %>
 </table>
+  </div>
 <br>
 <b>Totale prijs:</b> <%= @aankoops.inject(0) { |sum, aankoop| sum + aankoop.product.prijs.to_f } %>
 
 <br />
 
-
+</div>
 

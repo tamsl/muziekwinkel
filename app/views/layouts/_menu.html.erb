@@ -9,7 +9,7 @@
           <li><a href="/albums/bestrating"><b>Hoogst gewaardeerd</b></a></li>
       </ul>
     </li>
-    <li class="nav3 drop"><a class="main down" href="/nummers"><b>Genres</b></a>
+    <li class="nav3 drop"><a class="main down" href="/home/genreoverzicht"><b>Genres</b></a>
       <ul><li class="fly"><a class="main" href=" "><b>Overige</b></a>
             <ul><li><a href="/genre/blues"><b>Blues</b></a></li>
                 <li><a href="/genre/country"><b>Country</b></a></li>               
@@ -62,9 +62,18 @@
       <p><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>"/>
       &nbsp;user: <input id="login" name="login" type="text" class="input"/>
       wachtwoord: <input type="password" id="password" name="password" class="input" /></p>
-      <div class="button2"><%= link_to '<input name="hoi" type="submit" value="Signup"/>', signup_path %></div>
-      <div class="login" style="float:right;"><p>&nbsp;or </p></div>
       <div class="button"><input name="commit" type="submit" value="Log in"/></div>
     </form>
   </div>
+  
+    <div class="searchmenu">
+    <ul class="nav">
+      <li class="nav4 drop"><a class="main down" href="<%= signup_path %>"><b>Gebruiker</b></a>
+        <ul><li><a href="/winkelwagen"><b>Winkelwagen</b></a></li>
+            <li><%= link_to '<b>Sign up</b>', signup_path %></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 <% end %>
+
