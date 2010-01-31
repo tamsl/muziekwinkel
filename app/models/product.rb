@@ -4,5 +4,6 @@ class Product < ActiveRecord::Base
 
   has_many :commentaars
   has_many :aankoops
+  belongs_to :chart
 end
 

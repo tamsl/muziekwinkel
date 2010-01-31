@@ -2,11 +2,10 @@
     <% for album in @albums %>
       <li style="margin: 0px; padding: 0px">
         <span style="display: none"><%= h album.artiest %><%=h album.titel %></span>
-        <%= render :partial => 'albums/album', :locals => {:album => album} %>
+        <%= render :partial => 'albums/uitgelalbum', :locals => {:album => album} %>
       </li>
     <% end %>
   </ul>
-
   <% if user_is_medewerker? %>
     <%= link_to 'New Uitgelicht', new_uitgelicht_path %>
   <% end %>

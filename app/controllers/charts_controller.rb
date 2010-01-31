@@ -4,8 +4,7 @@ class ChartsController < ApplicationController
   # GET /charts
   # GET /charts.xml
   def index
-    @charts = Chart.find(:all, :order => 'genre').group_by { |i| i.genre }
-
+    @charts = Chart.find(:all, :order => 'genre, nummer').group_by { |i| i.genre }
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @charts }

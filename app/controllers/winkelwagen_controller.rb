@@ -28,4 +28,22 @@ class WinkelwagenController < ApplicationController
     redirect_to :back
   end
 
+  def checkout
+    if current_user
+        creditcard = current_user.creditcard
+        email = current_user.email
+    else
+        creditcard = params[:creditcard]
+        email = params[:email]
+    end
+
+    for product in Product.all(:conditions => {:id => session[:products]})
+        aankoop = Aankoop.new
+        aankoop.klant = current_user
+        aankoop.product = product
+        aankoop.betaald = true
+        aankoop.save
+    end
+    session[:products] = []
+  end
 end

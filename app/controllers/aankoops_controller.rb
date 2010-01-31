@@ -1,6 +1,8 @@
 class AankoopsController < ApplicationController
   layout 'standard'
-  before_filter :user_authorize
+
+  before_filter :authorize, :except => [:index, :show]
+  before_filter :user_authorize, :only => [:index, :show]
 
   def index
     @aankoops = Klant.find(params[:klant_id]).aankoops

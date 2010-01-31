@@ -23,6 +23,7 @@
   <%=h @aankoop.betaald %>
 </p>
 
-
-<%= link_to 'Edit', edit_klant_aankoop_path(@aankoop.klant_id, @aankoop) %> |
+<% if user_is_medewerker? %>
+  <%= link_to 'Edit', edit_klant_aankoop_path(@aankoop.klant_id, @aankoop) %> |
+<% end %>
 <%= link_to 'Back', klant_aankoops_path %>
