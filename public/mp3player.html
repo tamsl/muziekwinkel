@@ -53,8 +53,8 @@ function loadSWF(url, targetID, file, artiest, titel){
    } 
    //Embed SWF
    if (swfobject.hasFlashPlayerVersion("7")) {
-      var params = { flashvars:"titel=" + titel + "&artiest=" + artiest + "&mp3=" + file};
-      var attributes = { data: url, width:"960", height:"80" };
+      var params = {wmode:"transparent", flashvars:"titel=" + titel + "&artiest=" + artiest + "&mp3=" + file};
+      var attributes = { data: url, width:"960", height:"80"};
       var obj = swfobject.createSWF(attributes, params, targetID);
    }
 }
@@ -68,6 +68,7 @@ $(function() { play('None', 'None', 'None')});
 
 </head>
 <body><div class="container"><div class="mp3player"><div id="previewplayer">Download adobe flash player voor de nummer previews.</div>
+<div style="z-index:1000; color:#FFFFFF; left:2px; top:2px; position:absolute;">text stes</div>
 </div>
 </div>
 </body>
