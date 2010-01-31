@@ -1,11 +1,15 @@
-<h1>Winkelwagen</h1>
+<div style="padding:5px; height:14px; color:#FFFFFF; background-color:#000000; width:569px;">
+            Winkelwagen
+        </div>
+<div style="background-color:#ccc; width:559px; padding:10px">
+<div style="background-color:#ffffff">
+<table width="559px" border="0" align="center" cellpadding="2">
 
-<table>
   <tr>
-    <th>Album/Nummer</th>
-    <th>Titel</th>
-    <th>Artiest</th>
-    <th>Prijs</th>
+    <td width="50px"><strong>Type</strong></td>
+    <td width="140px"><strong>Titel</strong></td>
+    <td width="180px"><strong>Artiest</strong></td>
+    <td><strong>Prijs</strong></td>
   </tr>
 
 <% for product in @products %>
@@ -13,14 +17,14 @@
     <td><%=h product.type %></td>
     <td><%=h product.titel %></td>
     <td><%=h product.artiest %></td>
-    <td><%=h product.prijs %></td>
+    <td>&euro;<%=h product.prijs %></td>
     <td><%= link_to 'Remove', winkelwagen_path(product.id), :method => :delete %></td>
   </tr>
 <% end %>
-</table>
+</table></div>
 
 <br>
-<b>Totale prijs:</b> <%= @products.inject(0) { |sum, product| sum + product.prijs.to_f } %>
+<b>Totale prijs:</b> &euro;<%= @products.inject(0) { |sum, product| sum + product.prijs.to_f } %>
 
 <br/><br/>
 <table>
@@ -45,3 +49,4 @@
     <td><input type="submit" name="Koop" value="Koop" style="float: right" /></td>
 <% end %>
 </table>
+</div>

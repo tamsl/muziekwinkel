@@ -1,5 +1,10 @@
-<h1>You might also like</h1>
+<div style="padding:5px; height:14px; color:#FFFFFF; background-color:#000000; width:569px;">
+            Uw persoonlijke aanbevelingen
+        </div>
+<div style="background-color:#ccc; width:559px; padding:10px">
 
-<% for album in @albums %>
+<% for album in @albums %><div style="background-color:#ffffff; margin-bottom:10px">
   <%= render(:partial => '/albums/album', :locals => {:album => album}) %>
-<% end %>
+</div><% end %>
+
+</div>

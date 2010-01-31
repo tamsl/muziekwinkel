@@ -1,14 +1,17 @@
+  <div style="padding:5px; height:14px; color:#FFFFFF; background-color:#000000; width:569px;">
+  <% for album in @genrenaam %><%=h album.genre %><% end %>
+  </div>
 <div style="background-color:#cccccc; width:559px; padding:10px">
 <% for album in @albums %>
 <table width="559px" bgcolor="#ffffff">
  <tr>
-    <td width="100px" rowspan="6"><%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '100px', :height => '100px', :vspace => '3px', :hspace => '3px', :border => '0px'), :action => 'show', :id => album %></td>
+    <td width="100px" rowspan="6"><%= link_to image_tag((album.coverart or 'default-album.jpg'), :width => '100px', :height => '100px', :vspace => '3px', :hspace => '3px', :border => '0px'), :controller => 'albums', :action => 'show', :id => album %></td>
     <td width="50px">Artiest:</td>
     <td><%=h album.artiest %>&nbsp;</td>
   </tr>
   <tr>
     <td>Album:</td>
-    <td><%=h album.titel %>&nbsp;</td>
+    <td><%= link_to album.titel, album %>&nbsp;</td>
   </tr>
     <tr>
     <td>Lengte:</td>
@@ -27,27 +30,26 @@
     <td><%=album.nummers.count(:tracknr)%></td>
   </tr>
     <tr>
-    <td><div class="playknop" style="margin-left:4px; margin-bottom:2px"></div>
+    <td><div class="noplayknop" style="margin-left:4px; margin-bottom:2px"></div>
         <% form_tag('/winkelwagen', :method => "POST") do %>
           <input type="hidden" name="id" value="<%= album.id %>"/>
-          <button type="submit" style="border: 0px; padding: 0px; margin: 0px;"><div class="numkoopknop"></div></button>
+          <button type="submit" style="border: 0px; padding: 0px; margin: 0px;" class="numkoopknop"></button>
         <% end %>
     </td>
     <td>Prijs:</td>
     <td>&euro;<%=h album.prijs %></td>
   </tr>
-    
+    <% if user_is_medewerker? %>
+    <tr>
     <td></td>
-    <td><%= link_to 'Show', album %>&nbsp;
-           <% if user_is_medewerker? %>
-	   <%= link_to 'Edit', edit_album_path(album) %>&nbsp;<%= link_to 'Destroy', album, :confirm => 'Are you sure?', :method => :delete %>
-	   <% end %></td>
+    <td><%= link_to 'Show', album %>&nbsp;<%= link_to 'Edit', edit_album_path(album) %>&nbsp;<%= link_to 'Destroy', album, :confirm => 'Are you sure?', :method => :delete %></td>
     <td></td>
 </tr>
+<% end%>
 </table>
 <br />
 <% end %>
   <% if user_is_medewerker? %>
-    <%= link_to 'New album', new_album_path %>
-  <% end %>
+<%= link_to 'New album', new_album_path %>
+<% end %>
 </div>

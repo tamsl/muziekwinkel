@@ -1,24 +1,59 @@
-<h1>Listing charts</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
+<html>
+    <head>
+        <meta name="generator" content="HTML Tidy, see www.w3.org">
+        <title></title>
+    </head>
 
-<% for genre, nummers in @charts %>
-  <%= genre %>
-  <table>
-    <tr>
-      <th>Nummer</th>
-      <th>Titel</th>
-    </tr>
-  <% for nummer in nummers %>
-    <tr>
-      <td><%=h nummer.nummer %></td>
-      <td><%=h nummer.product.titel %></td>
-      <td><%= link_to 'Edit', edit_chart_path(nummer) %>
-          <%= link_to 'Destroy', nummer, :confirm => 'Are you sure?', :method => :delete %>
-      </td>
-    </tr>
-  <% end %>
-  </table>
-<% end %>
+    <body>
+        <div style=
+        "padding:5px; height:14px; color:#FFFFFF; background-color:#000000; width:569px;">
+            Charts
+        </div>
+        <div style=
+        "background-color:#ccc; width:559px; padding:10px">
+            <% for genre, nummers in @charts %>
+			<p class="right_head"><%= genre %><img src="images/downarrow.png" border="0px" hspace="2px" align="right"/></p>
+            <div class="right_body" style="background-color:#ffffff">
+            <table width="559px" border="0" align="center" cellpadding="2">
+                <tr>
+                    <td width="20px"><strong>#</strong></td>
 
-<br />
-<%= link_to 'New chart', new_chart_path %>
+                    <td width="150px"><strong>Artiest</strong></td>
+
+                    <td width="250px"><strong>Titel</strong></td>
+					<td></td>
+                </tr>
+                <% for nummer in nummers %>
+
+                <tr>
+                    <td width="20px"><%=h nummer.nummer %>.</td>
+
+                    <td width="150px">
+                    <%=h nummer.product.artiest %></td>
+
+                    <td width="250px"><%=h nummer.product.titel %></td>
+					<td>
+				    <a href="javascript:parent.mp3playa.play('hot.mp3', '<%= h escape_javascript nummer.product.artiest %>', '<%= h escape_javascript nummer.product.titel %>')">
+                    <div class="playknop"></div>
+                    </a>
+					<% form_tag('/winkelwagen', :method => "POST") do %>
+        <input type="hidden" name="id" value="<%= nummer.product.id %>"/>
+        <button type="submit" style="border: 0px; padding: 0px; margin: 0px;" class="numkoopknop"><div></div></button>
+      <% end %> </td>
+                    <% if user_is_medewerker? %>
+                    <td>
+                    <%= link_to 'Edit', edit_chart_path(nummer) %><%= link_to 'Destroy', nummer, :confirm => 'Are you sure?', :method => :delete %></td>
+                    <% end %>
+                </tr>
+                <% end %>
+            </table>
+			</div>
+            <% end %><br>
+             <% if user_is_medewerker? %>
+            <%= link_to 'New chart', new_chart_path %> <% end %>
+        </div>
+    </body>
+</html>
+

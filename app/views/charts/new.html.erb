@@ -1,19 +1,27 @@
-<h1>New chart</h1>
-
+<div style=
+        "padding:5px; height:14px; color:#FFFFFF; background-color:#000000; width:569px;">
+            Nieuwe chart
+        </div>
+        <div style="background-color:#ccc; width:559px; padding:10px">
 <% form_for(@chart) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :product %><br />
-    <%= f.collection_select :product_id, Nummer.all, :id, :titel %>
-  </p>
+
+<br />
+<br />
+<br />
+<br />
   <p>
     <%= f.label :genre %><br />
-    <%= f.text_field :genre %>
+    <%= select(:chart, :genre, ["Blues", "Country", "Dance", "Diversen", "Folk", "Jazz", "Kind & Jeugd", "Klassiek", "Nederlands", "New Age", "Pop", "Rap & Hiphop", "R&B & Soul", "Reggae", "Religieus", "Rock & Alternative", "Soundtracks & Musicals", "Verzamel-cd's & Boxsets", "Wereldmuziek"]) %>
   </p>
   <p>
     <%= f.label :nummer %><br />
     <%= f.text_field :nummer %>
+  </p>
+    <p>
+    <%= f.label :product %><br />
+    <%= f.collection_select :product_id, Nummer.all( :order => 'titel ASC'), :id, :titel %>
   </p>
   <p>
     <%= f.submit "Create" %>
@@ -21,3 +29,4 @@
 <% end %>
 
 <%= link_to 'Back', charts_path %>
+</div>

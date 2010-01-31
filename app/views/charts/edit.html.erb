@@ -3,17 +3,21 @@
 <% form_for(@chart) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :product %><br />
-    <%= f.text_field :product %>
-  </p>
+<br />
+<br />
+<br />
+<br />
   <p>
     <%= f.label :genre %><br />
-    <%= f.text_field :genre %>
+    <%= select(:chart, :genre, ["Blues", "Country", "Dance", "Diversen", "Folk", "Jazz", "Kind & Jeugd", "Klassiek", "Nederlands", "New Age", "Pop", "Rap & Hiphop", "R&B & Soul", "Reggae", "Religieus", "Rock & Alternative", "Soundtracks & Musicals", "Verzamel-cd's & Boxsets", "Wereldmuziek"]) %>
   </p>
   <p>
     <%= f.label :nummer %><br />
     <%= f.text_field :nummer %>
+  </p>
+    <p>
+    <%= f.label :product %><br />
+    <%= f.collection_select :product_id, Nummer.all( :order => 'titel ASC'), :id, :titel %>
   </p>
   <p>
     <%= f.submit "Update" %>

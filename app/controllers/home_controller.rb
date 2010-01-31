@@ -8,6 +8,7 @@ class HomeController < ApplicationController
 
   def genre
     @albums = Product.all(:conditions => ["type = 'Album' and LOWER(genre) = ?", params[:genre].downcase], :order => ":artiest ASC")
+    @genrenaam = Product.all(:conditions => ["type = 'Album' and LOWER(genre) = ?", params[:genre].downcase], :order => ":artiest ASC", :limit => 1)
     respond_to do |format|
       format.html
       format.xml  { render :xml => @albums }

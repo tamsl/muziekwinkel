@@ -1,5 +1,5 @@
-<div style="background-color:#ccc; width:559px; padding:10px">
   <% if @listnav %>
+  <div style="background-color:#ccc; width:559px; padding:0px 10px 10px 10px">
   <script type="text/javascript" src="jquery.listnav.min-2.1.js" charset="utf-8"></script>
   <script type="text/javascript" charset="utf-8">
     $(function(){
@@ -16,11 +16,16 @@
       });
     });
   </script>
-  
   <div id="categoryList-navbalk">
     <div id="categoryList-nav"></div>
   </div>
   <br />
+
+  <% else %>
+  <div style="padding:5px; height:14px; color:#FFFFFF; background-color:#000000; width:569px;">
+  <%= @pagetitle %>
+  </div>
+  <div style="background-color:#ccc; width:559px; padding:10px">
   <% end %>
 
   <ul id="categoryList" style="list-style-type: none; padding: 0px;">

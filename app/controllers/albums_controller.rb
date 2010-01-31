@@ -8,7 +8,7 @@ class AlbumsController < ApplicationController
   def index
     @albums = Album.find(:all)
     @listnav = true
-
+    @pagetitle = 'Alle albums'
     respond_to do |format|
       format.html
       format.xml  { render :xml => @albums }
@@ -18,7 +18,7 @@ class AlbumsController < ApplicationController
   def nieuwe
     @albums = Album.all(:order =>"jaar DESC", :limit => 10)
     @listnav = false
-
+    @pagetitle = 'Nieuwe albums'
     respond_to do |format|
       format.html { render :action => :index }
       format.xml  { render :xml => @albums }
@@ -28,6 +28,7 @@ class AlbumsController < ApplicationController
   def bestverkocht
     @albums = Album.all.sort_by { |a| a.aankoops.count }.reverse[0..9]
     @listnav = false
+    @pagetitle = 'Best verkochte albums'
 
     respond_to do |format|
       format.html { render :action => :index }
@@ -45,6 +46,7 @@ class AlbumsController < ApplicationController
         end
     }.reverse[0..9]
     @listnav = false
+    @pagetitle = 'Hoogst gewaardeerde albums'
 
     respond_to do |format|
       format.html { render :action => :index }
@@ -55,6 +57,7 @@ class AlbumsController < ApplicationController
   def uitgelicht
     @albums = Uitgelicht.all.collect { |u| u.album }
     @listnav = false
+    @pagetitle = 'Uitgelichte albums'
 
     respond_to do |format|
       format.html
